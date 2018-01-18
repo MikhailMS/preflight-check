@@ -126,10 +126,31 @@ verify_vim_setup() {
     printf "${GREEN} --> Vim executable in PATH${NC}\n"
     vim_version=`vim --version | grep "VIM" | awk '{print $5}' | tr -d '\n'`
     printf "${GREEN} --> Vim version $vim_version is installed${NC}\n"
-
   else
     printf "${RED} --> No Vim executable is found${NC}\n"
   fi
+}
+
+verify_homebrew_setup() {
+  printf "${LIGHT_BLUE}Checking Homebrew setup${NC}\n"
+  if type -p brew; then
+    printf "${GREEN} --> Homebrew executable in PATH${NC}\n"	  
+    brew_version=`brew --version | awk '{print $2}' | tr -d '(git' | tr -d '\n'`
+    printf "${GREEN} --> Homebrew version $brew_version is installed${NC}\n"
+  else
+    printf "${RED} --> No Homebrew executable is found${NC}\n"	  
+  fi
+}
+
+verify_rbenv_setup() {
+  printf "${LIGHT_BLUE}Checking rbenv setup${NC}\n"
+  if type -p rbenv; then
+    printf "${GREEN} --> rbenv executable in PATH${NC}\n"
+    rbenv_version=`rbenv --version | awk '{print $2}'`
+    printf "${GREEN} --> rbenv version $rbenv_version is installed${NC}\n"
+  else
+    printf "${RED} --> No rbenv executable is found${NC}\n"
+  fi	  
 }
 
 run_preflight_check() {
@@ -143,6 +164,8 @@ run_preflight_check() {
   verify_docker_setup
   verify_vagrant_setup
   verify_chef_setup
+  verify_homebrew_setup
+  verify_rbenv_setup
 }
 
 run_preflight_check

@@ -10,7 +10,9 @@
   - [x] Git presence
   - [x] Docker presence
   - [x] Vagrant presence
-  - [x] Removes duplicates from PATH variable
+  - [x] Homebrew presence
+  - [x] rbenv presence
+- [x] Removes duplicates from PATH variable 
 
 ## Some improvements could be made in the future and extra functionality could be added
 

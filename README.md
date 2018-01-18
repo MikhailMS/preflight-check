@@ -14,4 +14,7 @@
 
 ## Some improvements could be made in the future and extra functionality could be added
 
+## To run the script, execute command
+  `git clone https://github.com/MikhailMS/preflight-check pre-flight-check && cd preflight-check && . pre-flight-check.sh`
+
 ## Tested on MacOs 10.13.2 High Sierra

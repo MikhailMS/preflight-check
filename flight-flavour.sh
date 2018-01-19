@@ -15,6 +15,8 @@ macos_flavour() {
   verify_rbenv_setup
   verify_ruby_setup
   verify_bundler_setup
+  verify_gem_setup
+  verify_rails_setup
   verify_git_setup
   verify_vim_setup
   verify_docker_setup
@@ -38,6 +40,8 @@ linux_flavour() {
   verify_rbenv_setup
   verify_ruby_setup
   verify_bundler_setup
+  verify_gem_setup
+  verify_rails_setup
   verify_git_setup
   verify_vim_setup
   verify_docker_setup

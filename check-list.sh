@@ -146,7 +146,7 @@ verify_ruby_setup() {
   if type -p ruby; then
     printf "${GREEN} --> Found Ruby executable in PATH${NC}\n"
     ruby_version=`ruby -v | awk '{print $2}' || echo ""`
-    if [[ ! -z "$ruby_version" ]];then
+    if [[ ! -z "$ruby_version// " ]];then
       printf "${GREEN} --> Ruby version $ruby_version is installed${NC}\n"
     else
       printf "${YELLOW} --> Ruby version is not recognized, possibly you did not set it. Try run 'rbenv global [version]' if you have rbenv installed${NC}\n"
@@ -164,6 +164,31 @@ verify_bundler_setup() {
     printf "${GREEN} --> Bundler version $bundler_version is installed${NC}\n"
   else
     printf "${RED} --> No Bundler executable is found${NC}\n"
+  fi
+}
+
+verify_gem_setup() {
+  printf "${LIGHT_BLUE}Checking gem setup${NC}\n"
+  if type -p gem; then
+    printf "${GREEN} --> Found gem executable in PATH${NC}\n"
+    gem_version=`gem --version`
+    printf "${GREEN} --> gem version $gem_version is installed${NC}\n"
+  else
+    printf "${RED} --> No gem executable is found${NC}\n"
+  fi
+}
+
+verify_rails_setup() {
+  printf "${LIGHT_BLUE}Checking Ruby-on-Rails setup${NC}\n"
+  rails_version=`gem list | grep  '^rails ' | awk '{print $2}' | tr -d '()'`
+  if [[ ! -z "$rails_version// " ]]; then
+    if [[ "$rails_version" < "5.1.4" ]]; then
+      printf "${YELLOW} --> Current rails version $rails_version, when recommended is 5.1.4${NC}\n"
+    else
+      printf "${GREEN} --> Ruby-on-Rails version $rails_version is installed${NC}\n"
+    fi
+  else
+    printf "${RED} --> Ruby-on-Rails is not installed${NC}\n"
   fi
 }
 
@@ -194,7 +219,7 @@ verify_chef_setup() {
   if type -p chef-client; then
     printf "${GREEN} --> Found Chef executable in PATH${NC}\n"
     chef_version=`chef-client -version 2>/dev/null | awk '{print $2}'`
-    if [[ ! -z "$chef_version" ]];then
+    if [[ ! -z "$chef_version// " ]];then
       printf "${GREEN} --> Chef version $chef_version is installed${NC}\n"
     else
       printf "${YELLOW} --> Chef is found in PATH, but seems not being completely setup. Run 'chef-client' or 'chef-client -version' to see error message${NC}\n"
@@ -240,7 +265,7 @@ verify_homebrew_setup() {
 verify_smcfancontrol_setup() {
   printf "${LIGHT_BLUE}Checking if smcfancontrol installed${NC}\n"
   _smcfancontrol=`brew cask list | grep smcfancontrol | awk '{print $1}'`
-  if [[ "$_smcfancontrol" ]]; then
+  if [[ "$_smcfancontrol// " ]]; then
     printf "${GREEN} --> smcfancontrol installed${NC}\n"
   else
     printf "${RED} --> smcfancontrol is not installed${NC}\n"

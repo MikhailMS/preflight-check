@@ -23,5 +23,7 @@
 
 ## To run the script, execute command
   `git clone https://github.com/MikhailMS/preflight-check pre-flight-check && cd preflight-check && . pre-flight-check.sh`
-
-## Tested on MacOs 10.13.2 High Sierra
+## To get an update once downloaded, execute command, when in `preflight-check` folder
+  `git pull`
+  
+## Tested on MacOs 10.13.2 High Sierra, Centos 7

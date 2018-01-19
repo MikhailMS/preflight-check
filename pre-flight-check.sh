@@ -12,7 +12,7 @@ verify_proxies_setup() {
   if [[ ! -z "${HTTP_PROXY// }" ]];then
     curl -s --max-time 10 -x "${HTTP_PROXY}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
     _country_code=$!
-    if [[ "$_country_code" ]];then
+    if [[ ! -z "$_country_code// " ]];then
       printf "${GREEN} --> HTTP_PROXY is set : ${HTTP_PROXY} and working${NC}\n"
     else
       printf "${YELLOW} --> HTTP_PROXY is set : ${HTTP_PROXY} but doesn't work${NC}\n"
@@ -24,7 +24,7 @@ verify_proxies_setup() {
   if [[ ! -z "${http_proxy// }" ]];then
     curl -s --max-time 10 -x "${http_proxy}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
     _country_code=$!
-    if [[ "$_country_code" ]];then
+    if [[ ! -z "$_country_code" ]];then
       printf "${GREEN} --> http_proxy is set : ${http_proxy} and working${NC}\n"
     else
       printf "${YELLOW} --> http_proxy is set : ${http_proxy} but doesn't work${NC}\n"
@@ -36,7 +36,7 @@ verify_proxies_setup() {
   if [[ ! -z "${HTTPS_PROXY// }" ]];then
     curl -s --max-time 10 -x "${HTTPS_PROXY}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
     _country_code=$!
-    if [[ "$_country_code" ]];then
+    if [[ ! -z "$_country_code" ]];then
       printf "${GREEN} --> HTTPS_PROXY is set : ${HTTPS_PROXY} and working${NC}\n"
     else
       printf "${YELLOW} --> HTTPS_PROXY is set : ${HTTPS_PROXY} but doesn't work${NC}\n"
@@ -48,7 +48,7 @@ verify_proxies_setup() {
   if [[ ! -z "${https_proxy// }" ]];then
     curl -s --max-time 10 -x "${https_proxy}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
     _country_code=$!
-    if [[ "$_country_code" ]];then
+    if [[ ! -z "$_country_code" ]];then
       printf "${GREEN} --> https_proxy is set : ${https_proxy} and working${NC}\n"
     else
       printf "${YELLOW} --> https_proxy is set : ${https_proxy} but doesn't work${NC}\n"
@@ -71,7 +71,7 @@ verify_wget_setup() {
   printf "${LIGHT_BLUE}Checking wget setup${NC}\n"
   if type -p wget; then
     printf "${GREEN} --> Found wget executable in PATH${NC}\n"
-    wget_version=`wget --version | awk '{print $1}' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/' | tr -d '\n' | cut -c 1-6`
+    wget_version=`wget --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/' | sed -n 1p`
     printf "${GREEN} --> wget version $wget_version is installed${NC}\n"
   else
     printf "${RED} --> No wget executable is found${NC}\n"

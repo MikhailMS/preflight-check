@@ -257,3 +257,16 @@ verify_maven_setup() {
     printf "${RED} --> No Maven executable is found${NC}\n"
   fi
 }
+
+verify_iterm_setup() {
+  printf "${LIGHT_BLUE}Checking iTerm2 setup${NC}\n"
+  if [[ ! -z "${TERM_PROGRAM// }" ]]; then
+    if [ "${TERM_PROGRAM}" == "iTerm.app" ]; then
+      printf "${GREEN} --> iTerm2 is set and ready to go${NC}\n"
+    elif [ "${TERM_PROGRAM}" == "Apple_Terminal" ]; then
+      printf "${YELLOW} --> Default terminal detected. Recommended to switch to iTerm${NC}\n"
+    fi
+  else
+    printf "${RED} No terminal has been set! Fix it ASAP${NC}\n"
+  fi
+}

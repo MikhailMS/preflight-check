@@ -17,6 +17,7 @@
   - [x] Maven presence
   - [x] Bundler presence
   - [x] Miniconda presence
+  - [x] iTerm2 presence
 - [x] Removes duplicates from PATH variable
 - [x] Different checks, depending on OS:
   - [x] Mac OS

@@ -22,6 +22,7 @@ macos_flavour() {
   verify_chef_setup
   verify_homebrew_setup
   verify_smcfancontrol_setup
+  verify_iterm_setup
 }
 
 linux_flavour() {

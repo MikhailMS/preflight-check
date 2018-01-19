@@ -13,7 +13,11 @@
   - [x] Vagrant presence
   - [x] Homebrew presence
   - [x] rbenv presence
-- [x] Removes duplicates from PATH variable 
+  - [x] wget presence
+- [x] Removes duplicates from PATH variable
+- [x] Different checks, depending on OS:
+  -[x] Mac OS
+  -[x] GNU/Linux
 
 ## Some improvements could be made in the future and extra functionality could be added
 

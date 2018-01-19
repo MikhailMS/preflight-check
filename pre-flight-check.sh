@@ -60,11 +60,21 @@ verify_proxies_setup() {
 
 internet_connection() {
   printf "${LIGHT_BLUE}Checking internet connectivity${NC}\n"
-  wget -q --tries=10 --timeout=20 --spider http://google.com
-  if [[ $? -eq 0 ]]; then
-    printf "${GREEN}Internet connectivity check\n --> Online${NC}\n"
+  if [[ `curl --silent --max-time 10 http://google.com` ]]; then
+    printf "${GREEN} --> Online${NC}\n"
   else
-    printf "${RED}Internet connectivity check\n --> Offline${NC}\n"
+    printf "${RED} --> Offline${NC}\n"
+  fi
+}
+
+verify_wget_setup() {
+  printf "${LIGHT_BLUE}Checking wget setup${NC}\n"
+  if type -p wget; then
+    printf "${GREEN} --> Found wget executable in PATH${NC}\n"
+    wget_version=`wget --version | awk '{print $1}' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/' | tr -d '\n' | cut -c 1-6`
+    printf "${GREEN} --> wget version $wget_version is installed${NC}\n"
+  else
+    printf "${RED} --> No wget executable is found${NC}\n"
   fi
 }
 
@@ -193,6 +203,16 @@ verify_homebrew_setup() {
   fi
 }
 
+verify_smcfancontrol_setup() {
+  printf "${LIGHT_BLUE}Checking if smcfancontrol installed${NC}\n"
+  _smcfancontrol=`brew cask list | grep smcfancontrol | awk '{print $1}'`
+  if [[ "$_smcfancontrol" ]]; then
+    printf "${GREEN} --> smcfancontrol installed${NC}\n"
+  else
+    printf "${RED} --> smcfancontrol is not installed${NC}\n"
+  fi
+}
+
 verify_rbenv_setup() {
   printf "${LIGHT_BLUE}Checking rbenv setup${NC}\n"
   if type -p rbenv; then
@@ -204,8 +224,9 @@ verify_rbenv_setup() {
   fi
 }
 
-run_preflight_check() {
+run_preflight_check_mac() {
   verify_proxies_setup
+  verify_wget_setup
   internet_connection
   deduplicate PATH
   verify_java_setup
@@ -217,7 +238,30 @@ run_preflight_check() {
   verify_vagrant_setup
   verify_chef_setup
   verify_homebrew_setup
+  verify_smcfancontrol_setup
   verify_rbenv_setup
 }
 
-run_preflight_check
+run_preflight_check_linux() {
+  verify_proxies_setup
+  verify_wget_setup
+  internet_connection
+  deduplicate PATH
+  verify_java_setup
+  verify_python_setup
+  verify_ruby_setup
+  verify_git_setup
+  verify_vim_setup
+  verify_docker_setup
+  verify_vagrant_setup
+  verify_chef_setup
+  verify_rbenv_setup
+}
+
+if [ "$(uname)" == "Darwin" ]; then
+    # Mac OS X
+    run_preflight_check_mac
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    # GNU/Linux
+    run_preflight_check_linux
+fi

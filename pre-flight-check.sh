@@ -167,8 +167,12 @@ verify_chef_setup() {
   printf "${LIGHT_BLUE}Checking Chef setup${NC}\n"
   if type -p chef-client; then
     printf "${GREEN} --> Found Chef executable in PATH${NC}\n"
-    chef_version=`chef-client -version | awk '{print $2}'`
-    printf "${GREEN} --> Chef version $chef_version is installed${NC}\n"
+    chef_version=`chef-client -version | awk '{print $2}' || echo ""`
+    if [[ ! -z "$chef_version" ]];then
+      printf "${GREEN} --> Chef version $chef_version is installed${NC}\n"
+    else
+      printf "${YELLOW} --> Chef is found in PATH, but seems not being setup completely${NC}\n"
+    fi	    
   else
     printf "${RED} --> No Chef executable is found${NC}\n"
   fi

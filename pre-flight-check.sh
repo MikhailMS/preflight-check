@@ -171,7 +171,7 @@ verify_chef_setup() {
     if [[ ! -z "$chef_version" ]];then
       printf "${GREEN} --> Chef version $chef_version is installed${NC}\n"
     else
-      printf "${YELLOW} --> Chef is found in PATH, but seems not being completely setup. Run `chef-client` or `chef-client -version` to see error message${NC}\n"
+      printf "${YELLOW} --> Chef is found in PATH, but seems not being completely setup. Run 'chef-client' or 'chef-client -version' to see error message${NC}\n"
     fi	    
   else
     printf "${RED} --> No Chef executable is found${NC}\n"

@@ -225,6 +225,7 @@ verify_rbenv_setup() {
 }
 
 run_preflight_check_mac() {
+  printf "${YELLOW} -->${LIGHT_BLUE} Preflight Checks for Mac OS systems ${YELLOW}<--${NC}\n"
   verify_proxies_setup
   verify_wget_setup
   internet_connection
@@ -243,6 +244,7 @@ run_preflight_check_mac() {
 }
 
 run_preflight_check_linux() {
+  printf "${YELLOW} -->${LIGHT_BLUE} Preflight Checks for Linux systems ${YELLOW}<--${NC}\n"
   verify_proxies_setup
   verify_wget_setup
   internet_connection

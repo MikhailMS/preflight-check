@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# COLOUR CONSTANTS
-GREEN='\033[0;32m'
-LIGHT_BLUE='\033[1;34m'
-YELLOW='\033[1;33m'
-RED='\033[0;31m'
-NC='\033[0m'
-
 verify_proxies_setup() {
   printf "${LIGHT_BLUE}Checking proxies${NC}\n"
   if [[ ! -z "${HTTP_PROXY// }" ]];then
@@ -172,7 +165,7 @@ verify_chef_setup() {
       printf "${GREEN} --> Chef version $chef_version is installed${NC}\n"
     else
       printf "${YELLOW} --> Chef is found in PATH, but seems not being completely setup. Run 'chef-client' or 'chef-client -version' to see error message${NC}\n"
-    fi	    
+    fi
   else
     printf "${RED} --> No Chef executable is found${NC}\n"
   fi
@@ -231,47 +224,3 @@ verify_rbenv_setup() {
     printf "${RED} --> No rbenv executable is found${NC}\n"
   fi
 }
-
-run_preflight_check_mac() {
-  printf "${YELLOW} -->${LIGHT_BLUE} Preflight Checks for Mac OS systems ${YELLOW}<--${NC}\n"
-  verify_proxies_setup
-  verify_wget_setup
-  internet_connection
-  deduplicate PATH
-  verify_java_setup
-  verify_python_setup
-  verify_rbenv_setup
-  verify_ruby_setup
-  verify_git_setup
-  verify_vim_setup
-  verify_docker_setup
-  verify_vagrant_setup
-  verify_chef_setup
-  verify_homebrew_setup
-  verify_smcfancontrol_setup
-}
-
-run_preflight_check_linux() {
-  printf "${YELLOW} -->${LIGHT_BLUE} Preflight Checks for Linux systems ${YELLOW}<--${NC}\n"
-  verify_proxies_setup
-  verify_wget_setup
-  internet_connection
-  deduplicate PATH
-  verify_java_setup
-  verify_python_setup
-  verify_rbenv_setup
-  verify_ruby_setup
-  verify_git_setup
-  verify_vim_setup
-  verify_docker_setup
-  verify_vagrant_setup
-  verify_chef_setup
-}
-
-if [ "$(uname)" == "Darwin" ]; then
-    # Mac OS X
-    run_preflight_check_mac
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    # GNU/Linux
-    run_preflight_check_linux
-fi

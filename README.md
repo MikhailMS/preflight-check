@@ -22,7 +22,7 @@
 ## Some improvements could be made in the future and extra functionality could be added
 
 ## To run the script, execute command
-  `git clone https://github.com/MikhailMS/preflight-check pre-flight-check && cd preflight-check && . pre-flight-check.sh`
+  `git clone https://github.com/MikhailMS/preflight-check preflight-check && cd preflight-check && . pre-flight-check.sh`
 ## To get an update once downloaded, execute command, when in `preflight-check` folder
   `git pull`
   

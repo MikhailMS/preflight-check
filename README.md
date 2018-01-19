@@ -16,8 +16,8 @@
   - [x] wget presence
 - [x] Removes duplicates from PATH variable
 - [x] Different checks, depending on OS:
-  -[x] Mac OS
-  -[x] GNU/Linux
+  - [x] Mac OS
+  - [x] GNU/Linux
 
 ## Some improvements could be made in the future and extra functionality could be added
 

@@ -133,7 +133,7 @@ verify_python_setup() {
 verify_rbenv_setup() {
   printf "${LIGHT_BLUE}Checking rbenv setup${NC}\n"
   if type -p rbenv; then
-    printf "${GREEN} --> rbenv executable in PATH${NC}\n"
+    printf "${GREEN} --> Found rbenv executable in PATH${NC}\n"
     rbenv_version=`rbenv --version | awk '{print $2}'`
     printf "${GREEN} --> rbenv version $rbenv_version is installed${NC}\n"
   else
@@ -207,7 +207,7 @@ verify_chef_setup() {
 verify_git_setup() {
   printf "${LIGHT_BLUE}Checking Git setup${NC}\n"
   if type -p git; then
-    printf "${GREEN} --> Git is installed${NC}"
+    printf "${GREEN} --> Found Git executable in PATH${NC}\n"
     git_version=`git --version | awk '{print $3}'`
     printf "${GREEN} --> Git version $git_version is installed${NC}\n"
   else
@@ -218,7 +218,7 @@ verify_git_setup() {
 verify_vim_setup() {
   printf "${LIGHT_BLUE}Checking Vim setup${NC}\n"
   if type -p vim; then
-    printf "${GREEN} --> Vim executable in PATH${NC}\n"
+    printf "${GREEN} --> Found Vim executable in PATH${NC}\n"
     vim_version=`vim --version | grep "VIM" | awk '{print $5}' | tr -d '\n'`
     printf "${GREEN} --> Vim version $vim_version is installed${NC}\n"
   else
@@ -229,7 +229,7 @@ verify_vim_setup() {
 verify_homebrew_setup() {
   printf "${LIGHT_BLUE}Checking Homebrew setup${NC}\n"
   if type -p brew; then
-    printf "${GREEN} --> Homebrew executable in PATH${NC}\n"
+    printf "${GREEN} --> Found Homebrew executable in PATH${NC}\n"
     brew_version=`brew --version | awk '{print $2}' | tr -d '(git' | tr -d '\n'`
     printf "${GREEN} --> Homebrew version $brew_version is installed${NC}\n"
   else
@@ -250,7 +250,7 @@ verify_smcfancontrol_setup() {
 verify_maven_setup() {
   printf "${LIGHT_BLUE}Checking Maven setup${NC}\n"
   if type -p mvn; then
-    printf "${GREEN} --> Maven executable in PATH${NC}\n"
+    printf "${GREEN} --> Found Maven executable in PATH${NC}\n"
     maven_version=`mvn -v | grep "Apache Maven" | awk '{print $3}'`
     printf "${GREEN} --> Maven version $maven_version is installed${NC}\n"
   else

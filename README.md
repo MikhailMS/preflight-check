@@ -14,6 +14,7 @@
   - [x] Homebrew presence
   - [x] rbenv presence
   - [x] wget presence
+  - [x] Maven presence
 - [x] Removes duplicates from PATH variable
 - [x] Different checks, depending on OS:
   - [x] Mac OS

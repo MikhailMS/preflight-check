@@ -224,3 +224,14 @@ verify_rbenv_setup() {
     printf "${RED} --> No rbenv executable is found${NC}\n"
   fi
 }
+
+verify_maven_setup() {
+  printf "${LIGHT_BLUE}Checking Maven setup${NC}\n"
+  if type -p mvn; then
+    printf "${GREEN} --> Maven executable in PATH${NC}\n"
+    maven_version=`mvn -v | grep "Apache Maven" | awk '{print $3}'`
+    printf "${GREEN} --> Maven version $maven_version is installed${NC}\n"
+  else
+    printf "${RED} --> No Maven executable is found${NC}\n"
+  fi    	  
+}

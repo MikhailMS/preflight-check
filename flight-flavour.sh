@@ -5,6 +5,7 @@ macos_flavour() {
   internet_connection
   deduplicate PATH
   verify_java_setup
+  verify_maven_setup
   verify_python_setup
   verify_rbenv_setup
   verify_ruby_setup
@@ -24,6 +25,7 @@ linux_flavour() {
   internet_connection
   deduplicate PATH
   verify_java_setup
+  verify_maven_setup
   verify_python_setup
   verify_rbenv_setup
   verify_ruby_setup

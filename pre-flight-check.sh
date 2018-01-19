@@ -24,7 +24,7 @@ verify_proxies_setup() {
   if [[ ! -z "${http_proxy// }" ]];then
     curl -s --max-time 10 -x "${http_proxy}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
     _country_code=$!
-    if [[ ! -z "$_country_code" ]];then
+    if [[ ! -z "$_country_code// " ]];then
       printf "${GREEN} --> http_proxy is set : ${http_proxy} and working${NC}\n"
     else
       printf "${YELLOW} --> http_proxy is set : ${http_proxy} but doesn't work${NC}\n"
@@ -36,7 +36,7 @@ verify_proxies_setup() {
   if [[ ! -z "${HTTPS_PROXY// }" ]];then
     curl -s --max-time 10 -x "${HTTPS_PROXY}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
     _country_code=$!
-    if [[ ! -z "$_country_code" ]];then
+    if [[ ! -z "$_country_code// " ]];then
       printf "${GREEN} --> HTTPS_PROXY is set : ${HTTPS_PROXY} and working${NC}\n"
     else
       printf "${YELLOW} --> HTTPS_PROXY is set : ${HTTPS_PROXY} but doesn't work${NC}\n"
@@ -48,7 +48,7 @@ verify_proxies_setup() {
   if [[ ! -z "${https_proxy// }" ]];then
     curl -s --max-time 10 -x "${https_proxy}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
     _country_code=$!
-    if [[ ! -z "$_country_code" ]];then
+    if [[ ! -z "$_country_code// " ]];then
       printf "${GREEN} --> https_proxy is set : ${https_proxy} and working${NC}\n"
     else
       printf "${YELLOW} --> https_proxy is set : ${https_proxy} but doesn't work${NC}\n"

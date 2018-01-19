@@ -181,7 +181,7 @@ verify_gem_setup() {
 verify_rails_setup() {
   printf "${LIGHT_BLUE}Checking Ruby-on-Rails setup${NC}\n"
   rails_version=`gem list | grep  '^rails ' | awk '{print $2}' | tr -d '()'`
-  if [[ ! -z "$rails_version// " ]]; then
+  if [[ ! -z "$rails_version" ]]; then
     if [[ "$rails_version" < "5.1.4" ]]; then
       printf "${YELLOW} --> Current rails version $rails_version, when recommended is 5.1.4${NC}\n"
     else

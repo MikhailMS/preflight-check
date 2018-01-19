@@ -2,6 +2,7 @@
 
 ## Bash script to check if my workstation has everything I need for development:
 - [x] Currently checks for:
+  - [x] HTTP and HTTPS proxies presence and whether or not they working
   - [x] Internet connectivity
   - [x] Java presence
   - [x] Python presence

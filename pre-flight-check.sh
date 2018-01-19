@@ -7,6 +7,57 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
+verify_proxies_setup() {
+  printf "${LIGHT_BLUE}Checking proxies${NC}\n"
+  if [[ ! -z "${HTTP_PROXY// }" ]];then
+    curl -s --max-time 10 -x "${HTTP_PROXY}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
+    _country_code=$!
+    if [[ "$_country_code" ]];then
+      printf "${GREEN} --> HTTP_PROXY is set : ${HTTP_PROXY} and working${NC}\n"
+    else
+      printf "${YELLOW} --> HTTP_PROXY is set : ${HTTP_PROXY} but doesn't work${NC}\n"
+    fi
+  else
+    printf "${RED} --> HTTP_PROXY is not set${NC}\n"
+  fi
+
+  if [[ ! -z "${http_proxy// }" ]];then
+    curl -s --max-time 10 -x "${http_proxy}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
+    _country_code=$!
+    if [[ "$_country_code" ]];then
+      printf "${GREEN} --> http_proxy is set : ${http_proxy} and working${NC}\n"
+    else
+      printf "${YELLOW} --> http_proxy is set : ${http_proxy} but doesn't work${NC}\n"
+    fi
+  else
+    printf "${RED} --> http_proxy is not set${NC}\n"
+  fi
+
+  if [[ ! -z "${HTTPS_PROXY// }" ]];then
+    curl -s --max-time 10 -x "${HTTPS_PROXY}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
+    _country_code=$!
+    if [[ "$_country_code" ]];then
+      printf "${GREEN} --> HTTPS_PROXY is set : ${HTTPS_PROXY} and working${NC}\n"
+    else
+      printf "${YELLOW} --> HTTPS_PROXY is set : ${HTTPS_PROXY} but doesn't work${NC}\n"
+    fi
+  else
+    printf "${RED} --> HTTPS_PROXY is not set${NC}\n"
+  fi
+
+  if [[ ! -z "${https_proxy// }" ]];then
+    curl -s --max-time 10 -x "${https_proxy}" ip-api.com/json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g'| sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w "city" | sed -e "s/^city|//"
+    _country_code=$!
+    if [[ "$_country_code" ]];then
+      printf "${GREEN} --> https_proxy is set : ${https_proxy} and working${NC}\n"
+    else
+      printf "${YELLOW} --> https_proxy is set : ${https_proxy} but doesn't work${NC}\n"
+    fi
+  else
+    printf "${RED} --> https_proxy is not set${NC}\n"
+  fi
+}
+
 internet_connection() {
   printf "${LIGHT_BLUE}Checking internet connectivity${NC}\n"
   wget -q --tries=10 --timeout=20 --spider http://google.com
@@ -134,11 +185,11 @@ verify_vim_setup() {
 verify_homebrew_setup() {
   printf "${LIGHT_BLUE}Checking Homebrew setup${NC}\n"
   if type -p brew; then
-    printf "${GREEN} --> Homebrew executable in PATH${NC}\n"	  
+    printf "${GREEN} --> Homebrew executable in PATH${NC}\n"
     brew_version=`brew --version | awk '{print $2}' | tr -d '(git' | tr -d '\n'`
     printf "${GREEN} --> Homebrew version $brew_version is installed${NC}\n"
   else
-    printf "${RED} --> No Homebrew executable is found${NC}\n"	  
+    printf "${RED} --> No Homebrew executable is found${NC}\n"
   fi
 }
 
@@ -150,10 +201,11 @@ verify_rbenv_setup() {
     printf "${GREEN} --> rbenv version $rbenv_version is installed${NC}\n"
   else
     printf "${RED} --> No rbenv executable is found${NC}\n"
-  fi	  
+  fi
 }
 
 run_preflight_check() {
+  verify_proxies_setup
   internet_connection
   deduplicate PATH
   verify_java_setup

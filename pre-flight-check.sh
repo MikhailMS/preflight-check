@@ -130,8 +130,12 @@ verify_ruby_setup() {
   printf "${LIGHT_BLUE}Checking Ruby setup${NC}\n"
   if type -p ruby; then
     printf "${GREEN} --> Found Ruby executable in PATH${NC}\n"
-    ruby_version=`ruby -v | awk '{print $2}'`
-    printf "${GREEN} --> Ruby version $ruby_version is installed${NC}\n"
+    ruby_version=`ruby -v | awk '{print $2}' || echo ""`
+    if [[ ! -z "$ruby_version" ]];then
+      printf "${GREEN} --> Ruby version $ruby_version is installed${NC}\n"
+    else
+      printf "${YELLOW} --> Ruby version is not recognized, possibly you did not set it. Try run 'rbenv global [version]' if you have rbenv installed${NC}\n"
+    fi
   else
     printf "${RED} --> No Ruby executable is found${NC}\n"
   fi
@@ -232,6 +236,7 @@ run_preflight_check_mac() {
   deduplicate PATH
   verify_java_setup
   verify_python_setup
+  verify_rbenv_setup
   verify_ruby_setup
   verify_git_setup
   verify_vim_setup
@@ -240,7 +245,6 @@ run_preflight_check_mac() {
   verify_chef_setup
   verify_homebrew_setup
   verify_smcfancontrol_setup
-  verify_rbenv_setup
 }
 
 run_preflight_check_linux() {
@@ -251,13 +255,13 @@ run_preflight_check_linux() {
   deduplicate PATH
   verify_java_setup
   verify_python_setup
+  verify_rbenv_setup
   verify_ruby_setup
   verify_git_setup
   verify_vim_setup
   verify_docker_setup
   verify_vagrant_setup
   verify_chef_setup
-  verify_rbenv_setup
 }
 
 if [ "$(uname)" == "Darwin" ]; then

@@ -108,6 +108,17 @@ verify_java_setup() {
   fi
 }
 
+verify_miniconda_setup() {
+  printf "${LIGHT_BLUE}Checking Miniconda setup${NC}\n"
+  if type -p conda; then
+    printf "${GREEN} --> Found Miniconda executable in PATH${NC}\n"
+    conda_version=`conda --version 2>&1 | awk '{print $2}'`
+    printf "${GREEN} --> Miniconda version $conda_version is installed${NC}\n"
+  else
+    printf "${RED} --> No Miniconda executable is found${NC}\n"
+  fi
+}
+
 verify_python_setup() {
   printf "${LIGHT_BLUE}Checking Python setup${NC}\n"
   if type -p python; then
@@ -116,6 +127,17 @@ verify_python_setup() {
     printf "${GREEN} --> Python version $python_version is installed${NC}\n"
   else
     printf "${RED} --> No Python executable is found${NC}\n"
+  fi
+}
+
+verify_rbenv_setup() {
+  printf "${LIGHT_BLUE}Checking rbenv setup${NC}\n"
+  if type -p rbenv; then
+    printf "${GREEN} --> rbenv executable in PATH${NC}\n"
+    rbenv_version=`rbenv --version | awk '{print $2}'`
+    printf "${GREEN} --> rbenv version $rbenv_version is installed${NC}\n"
+  else
+    printf "${RED} --> No rbenv executable is found${NC}\n"
   fi
 }
 
@@ -131,6 +153,17 @@ verify_ruby_setup() {
     fi
   else
     printf "${RED} --> No Ruby executable is found${NC}\n"
+  fi
+}
+
+verify_bundler_setup() {
+  printf "${LIGHT_BLUE}Checking Bundler setup${NC}\n"
+  if type -p bundler; then
+    printf "${GREEN} --> Found Bundler executable in PATH${NC}\n"
+    bundler_version=`bundler -v | awk '{print $3}'`
+    printf "${GREEN} --> Bundler version $bundler_version is installed${NC}\n"
+  else
+    printf "${RED} --> No Bundler executable is found${NC}\n"
   fi
 }
 
@@ -214,17 +247,6 @@ verify_smcfancontrol_setup() {
   fi
 }
 
-verify_rbenv_setup() {
-  printf "${LIGHT_BLUE}Checking rbenv setup${NC}\n"
-  if type -p rbenv; then
-    printf "${GREEN} --> rbenv executable in PATH${NC}\n"
-    rbenv_version=`rbenv --version | awk '{print $2}'`
-    printf "${GREEN} --> rbenv version $rbenv_version is installed${NC}\n"
-  else
-    printf "${RED} --> No rbenv executable is found${NC}\n"
-  fi
-}
-
 verify_maven_setup() {
   printf "${LIGHT_BLUE}Checking Maven setup${NC}\n"
   if type -p mvn; then
@@ -233,5 +255,5 @@ verify_maven_setup() {
     printf "${GREEN} --> Maven version $maven_version is installed${NC}\n"
   else
     printf "${RED} --> No Maven executable is found${NC}\n"
-  fi    	  
+  fi
 }

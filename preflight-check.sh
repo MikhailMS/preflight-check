@@ -7,7 +7,6 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-source check-list.sh
 source flight-flavour.sh
 
 if [ "$(uname)" == "Darwin" ]; then

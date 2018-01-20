@@ -20,6 +20,7 @@
   - [x] iTerm2 presence
   - [x] gem presence
   - [x] Ruby-on-Rails presence
+  - [x] Adshell presence
 - [x] Removes duplicates from PATH variable
 - [-] Different checks, depending on OS:
   - [x] Mac OS

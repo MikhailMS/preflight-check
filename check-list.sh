@@ -675,3 +675,71 @@ verify_iterm_setup() {
     done
   fi
 }
+
+verify_adshell_setup() {
+  printf "${LIGHT_BLUE}Checking adshell setup${NC}\n"
+  if [[ -d "~/.adshell" ]]; then
+    printf "${GREEN} --> Adshell is found on the machine${NC}\n"
+    while true; do
+      read -p "If you did not yet install {adshell}, would you like to do it now? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          ~/.adshell/install
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Make sure to install it later${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
+  else
+    printf "${RED} --> Adshell is not found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {adshell}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+            # Mac OS X
+            install_adshell_macos
+          else
+            # Other OS
+            install_adshell
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Optional: Brings sugar to your terminal\n ~~> Checkout https://github.com/AdamWhittingham/adshell for details${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
+  fi
+}
+
+improve_vim() {
+  printf "${LIGHT_BLUE}Would you love to bring nice plugins to your Vim?${NC}\n"
+  while true; do
+    printf "${LIGHT_BLUE}Checout https://github.com/AdamWhittingham/vim-config before using this Vim configuration${NC}\n"
+    read -p "Do you wish to improve your {Vim}? [Yes/No] " yn
+    case $yn in
+      [Yy]* )
+        install_nicer_vim_config
+        break
+        ;;
+      [Nn]* )
+        printf "${YELLOW} ~~> Completely optional part${NC}\n"
+        break
+        ;;
+      * )
+        echo "Please answer yes or no\n"
+        ;;
+    esac
+  done
+}

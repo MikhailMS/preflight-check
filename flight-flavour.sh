@@ -23,11 +23,13 @@ macos_flavour() {
   verify_git_setup
   verify_wget_setup
   verify_vim_setup
+  improve_vim
   verify_docker_setup
   verify_vagrant_setup
   verify_chef_setup
   verify_smcfancontrol_setup
   verify_iterm_setup
+  verify_adshell_setup
 }
 
 linux_flavour() {
@@ -49,7 +51,9 @@ linux_flavour() {
   verify_git_setup
   verify_wget_setup
   verify_vim_setup
+  improve_vim
   verify_docker_setup
   verify_vagrant_setup
   verify_chef_setup
+  verify_adshell_setup
 }

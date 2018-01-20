@@ -94,6 +94,11 @@ install_homebrew_macos() {
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 }
 
+install_adshell_macos() {
+  git clone https://github.com/AdamWhittingham/adshell --recursive ~/.adshell && ~/.adshell/install
+  # Need to sort out ~/.bashrc ~/.bash_profile settings
+}
+
 # -------------------- GNU/Linux ingredients --------------------
 install_java_linux() {
   apt-get update
@@ -134,6 +139,14 @@ install_bundler() {
 
 install_rails() {
   gem install rails -v 5.1.4
+}
+
+install_adshell() {
+  git clone https://github.com/AdamWhittingham/adshell --recursive ~/.adshell && ~/.adshell/install
+}
+
+install_nicer_vim_config() {
+  git clone https://github.com/AdamWhittingham/vim-config.git ~/.vim && ~/.vim/install
 }
 
 # -------------------- Sugar ------------------------------------

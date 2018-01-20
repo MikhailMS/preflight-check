@@ -68,6 +68,31 @@ verify_wget_setup() {
     printf "${GREEN} --> wget version $wget_version is installed${NC}\n"
   else
     printf "${RED} --> No wget executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {wget}? It would be used to install some of the required ingredients -- [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_wget_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_wget_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_wget_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${RED} ~~> Some installation procedures relies on wget, be aware${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -97,6 +122,31 @@ verify_java_setup() {
     _java="$JAVA_HOME/bin/java"
   else
     printf "${RED}Java is not available - Check JAVA_HOME or PATH${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Java}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_java_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_java_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_java_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${RED} ~~> Make sure to install Java later${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 
   if [[ "$_java" ]]; then
@@ -116,6 +166,31 @@ verify_miniconda_setup() {
     printf "${GREEN} --> Miniconda version $conda_version is installed${NC}\n"
   else
     printf "${RED} --> No Miniconda executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Miniconda}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_miniconda_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_miniconda_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_miniconda_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> It is optional to install Miniconda, but makes work with Python nicer & easier${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -127,6 +202,31 @@ verify_python_setup() {
     printf "${GREEN} --> Python version $python_version is installed${NC}\n"
   else
     printf "${RED} --> No Python executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Python}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_python_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_python_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_python_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Please double check Python presence, since it comes with OS distribution by default${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -138,6 +238,31 @@ verify_rbenv_setup() {
     printf "${GREEN} --> rbenv version $rbenv_version is installed${NC}\n"
   else
     printf "${RED} --> No rbenv executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {rbenv}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_rbenv_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_rbenv_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_rbenv_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> It is optional to install rbenv, but makes work with Ruby nicer & easier${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -153,6 +278,31 @@ verify_ruby_setup() {
     fi
   else
     printf "${RED} --> No Ruby executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Ruby}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_ruby_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_ruby_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_ruby_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Make sure to install Ruby later${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -164,6 +314,22 @@ verify_bundler_setup() {
     printf "${GREEN} --> Bundler version $bundler_version is installed${NC}\n"
   else
     printf "${RED} --> No Bundler executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {bundler}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          install_bundler
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> It is optional to install bundler, but it takes care of managing ruby gems${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -189,6 +355,22 @@ verify_rails_setup() {
     fi
   else
     printf "${RED} --> Ruby-on-Rails is not installed${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Ruby-on-Rails}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          install_rails
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Ruby-on-Rails is optional, unless you're aiming to develop web apps${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -200,6 +382,31 @@ verify_docker_setup() {
     printf "${GREEN} --> Docker version $docker_version is installed${NC}\n"
   else
     printf "${RED} --> No Docker executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Docker}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_docker_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_docker_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_docker_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> It is a nice tool to manage applications and stuff rather than using VMs${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -211,6 +418,31 @@ verify_vagrant_setup() {
     printf "${GREEN} --> Vagrant version $vagrant_version is installed${NC}\n"
   else
     printf "${RED} --> No Vagrant executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Vagrant}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_vagrant_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_vagrant_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_vagrant_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> It is sad to live without VMs and Vagrant :(${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -226,6 +458,31 @@ verify_chef_setup() {
     fi
   else
     printf "${RED} --> No Chef executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Chef}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_chef_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_chef_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_chef_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Optional installation${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -237,6 +494,31 @@ verify_git_setup() {
     printf "${GREEN} --> Git version $git_version is installed${NC}\n"
   else
     printf "${RED} --> No Git executable is found${RED}\n"
+    while true; do
+      read -p "Do you wish to install {Git}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_git_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_git_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_git_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${RED} ~~> It is important to have Git installed, if you want to do real development${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -248,6 +530,31 @@ verify_vim_setup() {
     printf "${GREEN} --> Vim version $vim_version is installed${NC}\n"
   else
     printf "${RED} --> No Vim executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Vim}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_vim_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_vim_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_vim_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Only install it, if you are either crazy or know what's Vim about${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -259,6 +566,22 @@ verify_homebrew_setup() {
     printf "${GREEN} --> Homebrew version $brew_version is installed${NC}\n"
   else
     printf "${RED} --> No Homebrew executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Homebrew}? It would be used to install some of the required ingredients -- [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          install_homebrew_macos
+          break
+          ;;
+        [Nn]* )
+          printf "${RED} ~~> This ingredient is mandatory to install. Make sure you got it on machine${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -269,6 +592,22 @@ verify_smcfancontrol_setup() {
     printf "${GREEN} --> smcfancontrol installed${NC}\n"
   else
     printf "${RED} --> smcfancontrol is not installed${NC}\n"
+    while true; do
+      read -p "Do you wish to install {smcfancontrol}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          install_smcfancontrol_macos
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Optional utility to monitor fan speed and computer temperature${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -280,6 +619,31 @@ verify_maven_setup() {
     printf "${GREEN} --> Maven version $maven_version is installed${NC}\n"
   else
     printf "${RED} --> No Maven executable is found${NC}\n"
+    while true; do
+      read -p "Do you wish to install {Maven}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_maven_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_maven_linux
+          elif [ "$(cat /etc/issue | grep 'Red Hat' | awk '{print $1}')" == "Red Hat" ]; then
+              # Red Hat dist, Centos
+              install_maven_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> It is optional, but makes managing Java dependencies nicer & easier${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }
 
@@ -293,5 +657,21 @@ verify_iterm_setup() {
     fi
   else
     printf "${RED} No terminal has been set! Fix it ASAP${NC}\n"
+    while true; do
+      read -p "Do you wish to install {iTerm}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          install_iterm_macos
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Optional: Improved version of default Mac OS terminal${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
   fi
 }

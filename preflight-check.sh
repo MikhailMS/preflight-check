@@ -12,7 +12,7 @@ source flight-flavour.sh
 if [ "$(uname)" == "Darwin" ]; then
     # Mac OS X
     macos_flavour
-elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}' | cut -d '-' -f1)" == "redhat" ]; then
+elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
     # RedHat/Centos
     redhat_flavour
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then

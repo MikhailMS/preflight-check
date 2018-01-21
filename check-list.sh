@@ -79,7 +79,7 @@ verify_wget_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_wget_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # Red Hat dist, Centos
               install_wget_redhat
           fi
@@ -134,7 +134,7 @@ verify_java_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_java_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_java_redhat
           fi
@@ -180,7 +180,7 @@ verify_miniconda_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_miniconda_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # Red Hat dist, Centos
               install_miniconda_redhat
           fi
@@ -217,7 +217,7 @@ verify_python_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_python_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_python_redhat
           fi
@@ -254,7 +254,7 @@ verify_rbenv_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_rbenv_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_rbenv_redhat
           fi
@@ -294,7 +294,7 @@ verify_ruby_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_ruby_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_ruby_redhat
           fi
@@ -401,7 +401,7 @@ verify_docker_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_docker_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_docker_redhat
           fi
@@ -438,7 +438,7 @@ verify_vagrant_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_vagrant_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_vagrant_redhat
           fi
@@ -479,7 +479,7 @@ verify_chef_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_chef_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_chef_redhat
           fi
@@ -516,7 +516,7 @@ verify_git_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_git_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_git_redhat
           fi
@@ -553,7 +553,7 @@ verify_vim_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_vim_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_vim_redhat
           fi
@@ -645,7 +645,7 @@ verify_maven_setup() {
           elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
               # GNU/Linux
               install_maven_linux
-          elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "centos" || "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | awk '{print $1}') | cut -d '-' -f1)" == "redhat" ]; then
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_maven_centos
           fi

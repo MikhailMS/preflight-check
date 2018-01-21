@@ -68,8 +68,9 @@ verify_wget_setup() {
     printf "${GREEN} --> wget version $wget_version is installed${NC}\n"
   else
     printf "${RED} --> No wget executable is found${NC}\n"
+    printf "${YELLOW} ~~> It would be used to install some of the required ingredients${NC}\n"
     while true; do
-      read -p "Do you wish to install {wget}? It would be used to install some of the required ingredients -- [Yes/No] " yn
+      read -p " ~~> Do you wish to install {wget}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -85,7 +86,8 @@ verify_wget_setup() {
           break
           ;;
         [Nn]* )
-          printf "${RED} ~~> Some installation procedures relies on wget, be aware${NC}\n"
+          printf "${RED} ~~> Be aware, some installation procedures relies on wget & will fail w/o {wget}${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -123,7 +125,7 @@ verify_java_setup() {
   else
     printf "${RED}Java is not available - Check JAVA_HOME or PATH${NC}\n"
     while true; do
-      read -p "Do you wish to install {Java}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Java}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -140,6 +142,7 @@ verify_java_setup() {
           ;;
         [Nn]* )
           printf "${RED} ~~> Make sure to install Java later${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -166,8 +169,9 @@ verify_miniconda_setup() {
     printf "${GREEN} --> Miniconda version $conda_version is installed${NC}\n"
   else
     printf "${RED} --> No Miniconda executable is found${NC}\n"
+    printf "${YELLOW} ~~> It is optional to install Miniconda, but makes work with Python nicer & easier${NC}\n"
     while true; do
-      read -p "Do you wish to install {Miniconda}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Miniconda}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -183,7 +187,7 @@ verify_miniconda_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> It is optional to install Miniconda, but makes work with Python nicer & easier${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -202,8 +206,9 @@ verify_python_setup() {
     printf "${GREEN} --> Python version $python_version is installed${NC}\n"
   else
     printf "${RED} --> No Python executable is found${NC}\n"
+    printf "${YELLOW} ~~> Please double check Python presence, since it usually comes with OS distribution by default${NC}\n"
     while true; do
-      read -p "Do you wish to install {Python}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Python}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -219,7 +224,7 @@ verify_python_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> Please double check Python presence, since it comes with OS distribution by default${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -238,8 +243,9 @@ verify_rbenv_setup() {
     printf "${GREEN} --> rbenv version $rbenv_version is installed${NC}\n"
   else
     printf "${RED} --> No rbenv executable is found${NC}\n"
+    printf "${YELLOW} ~~> It is optional to install rbenv, but makes work with Ruby nicer & easier${NC}\n"
     while true; do
-      read -p "Do you wish to install {rbenv}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {rbenv}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -255,7 +261,7 @@ verify_rbenv_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> It is optional to install rbenv, but makes work with Ruby nicer & easier${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -279,7 +285,7 @@ verify_ruby_setup() {
   else
     printf "${RED} --> No Ruby executable is found${NC}\n"
     while true; do
-      read -p "Do you wish to install {Ruby}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Ruby}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -295,7 +301,7 @@ verify_ruby_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> Make sure to install Ruby later${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -314,15 +320,16 @@ verify_bundler_setup() {
     printf "${GREEN} --> Bundler version $bundler_version is installed${NC}\n"
   else
     printf "${RED} --> No Bundler executable is found${NC}\n"
+    printf "${YELLOW} ~~> It is optional to install bundler, but it takes care of managing ruby gems${NC}\n"
     while true; do
-      read -p "Do you wish to install {bundler}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {bundler}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           install_bundler
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> It is optional to install bundler, but it takes care of managing ruby gems${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -355,15 +362,16 @@ verify_rails_setup() {
     fi
   else
     printf "${RED} --> Ruby-on-Rails is not installed${NC}\n"
+    printf "${YELLOW} ~~> Ruby-on-Rails is optional, unless you're aiming to develop web apps${NC}\n"
     while true; do
-      read -p "Do you wish to install {Ruby-on-Rails}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Ruby-on-Rails}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           install_rails
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> Ruby-on-Rails is optional, unless you're aiming to develop web apps${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -382,8 +390,9 @@ verify_docker_setup() {
     printf "${GREEN} --> Docker version $docker_version is installed${NC}\n"
   else
     printf "${RED} --> No Docker executable is found${NC}\n"
+    printf "${YELLOW} ~~> It is a nice tool to manage applications and stuff rather than using VMs${NC}\n"
     while true; do
-      read -p "Do you wish to install {Docker}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Docker}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -399,7 +408,7 @@ verify_docker_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> It is a nice tool to manage applications and stuff rather than using VMs${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -418,8 +427,9 @@ verify_vagrant_setup() {
     printf "${GREEN} --> Vagrant version $vagrant_version is installed${NC}\n"
   else
     printf "${RED} --> No Vagrant executable is found${NC}\n"
+    printf "${YELLOW} ~~> It is sad to live without VMs and Vagrant :(${NC}\n"
     while true; do
-      read -p "Do you wish to install {Vagrant}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Vagrant}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -435,7 +445,7 @@ verify_vagrant_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> It is sad to live without VMs and Vagrant :(${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -458,8 +468,9 @@ verify_chef_setup() {
     fi
   else
     printf "${RED} --> No Chef executable is found${NC}\n"
+    printf "${YELLOW} ~~> Chef is optional installation${NC}\n"
     while true; do
-      read -p "Do you wish to install {Chef}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Chef}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -475,7 +486,7 @@ verify_chef_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> Optional installation${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -494,8 +505,9 @@ verify_git_setup() {
     printf "${GREEN} --> Git version $git_version is installed${NC}\n"
   else
     printf "${RED} --> No Git executable is found${RED}\n"
+    printf "${RED} ~~> It is important to have Git installed, if you want to do real development${NC}\n"
     while true; do
-      read -p "Do you wish to install {Git}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Git}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -511,7 +523,7 @@ verify_git_setup() {
           break
           ;;
         [Nn]* )
-          printf "${RED} ~~> It is important to have Git installed, if you want to do real development${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -530,8 +542,9 @@ verify_vim_setup() {
     printf "${GREEN} --> Vim version $vim_version is installed${NC}\n"
   else
     printf "${RED} --> No Vim executable is found${NC}\n"
+    printf "${YELLOW} ~~> Only install it, if you are either crazy or know what's Vim about${NC}\n"
     while true; do
-      read -p "Do you wish to install {Vim}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Vim}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -547,7 +560,7 @@ verify_vim_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> Only install it, if you are either crazy or know what's Vim about${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -566,15 +579,16 @@ verify_homebrew_setup() {
     printf "${GREEN} --> Homebrew version $brew_version is installed${NC}\n"
   else
     printf "${RED} --> No Homebrew executable is found${NC}\n"
+    printf "${RED} ~~> This ingredient is mandatory to install. Make sure you got it on machine${NC}\n"
     while true; do
-      read -p "Do you wish to install {Homebrew}? It would be used to install some of the required ingredients -- [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Homebrew}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           install_homebrew_macos
           break
           ;;
         [Nn]* )
-          printf "${RED} ~~> This ingredient is mandatory to install. Make sure you got it on machine${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -592,15 +606,16 @@ verify_smcfancontrol_setup() {
     printf "${GREEN} --> smcfancontrol installed${NC}\n"
   else
     printf "${RED} --> smcfancontrol is not installed${NC}\n"
+    printf "${YELLOW} ~~> Optional utility to monitor fan speed and computer temperature${NC}\n"
     while true; do
-      read -p "Do you wish to install {smcfancontrol}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {smcfancontrol}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           install_smcfancontrol_macos
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> Optional utility to monitor fan speed and computer temperature${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -619,8 +634,9 @@ verify_maven_setup() {
     printf "${GREEN} --> Maven version $maven_version is installed${NC}\n"
   else
     printf "${RED} --> No Maven executable is found${NC}\n"
+    printf "${YELLOW} ~~> It is optional, but makes managing Java dependencies nicer & easier${NC}\n"
     while true; do
-      read -p "Do you wish to install {Maven}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {Maven}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -636,7 +652,7 @@ verify_maven_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> It is optional, but makes managing Java dependencies nicer & easier${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -654,25 +670,26 @@ verify_iterm_setup() {
       printf "${GREEN} --> iTerm2 is set and ready to go${NC}\n"
     elif [ "${TERM_PROGRAM}" == "Apple_Terminal" ]; then
       printf "${YELLOW} --> Default terminal detected. Recommended to switch to iTerm${NC}\n"
+      printf "${YELLOW} ~~> Optional: Improved version of default Mac OS terminal${NC}\n"
+      while true; do
+        read -p " ~~> Do you wish to install {iTerm}? [Yes/No] " yn
+        case $yn in
+          [Yy]* )
+            install_iterm_macos
+            break
+            ;;
+          [Nn]* )
+            printf "${YELLOW} ~~> Skipping installation${NC}\n"
+            break
+            ;;
+          * )
+            echo "Please answer yes or no\n"
+            ;;
+        esac
+      done
     fi
   else
     printf "${RED} No terminal has been set! Fix it ASAP${NC}\n"
-    while true; do
-      read -p "Do you wish to install {iTerm}? [Yes/No] " yn
-      case $yn in
-        [Yy]* )
-          install_iterm_macos
-          break
-          ;;
-        [Nn]* )
-          printf "${YELLOW} ~~> Optional: Improved version of default Mac OS terminal${NC}\n"
-          break
-          ;;
-        * )
-          echo "Please answer yes or no\n"
-          ;;
-      esac
-    done
   fi
 }
 
@@ -698,8 +715,10 @@ verify_adshell_setup() {
     done
   else
     printf "${RED} --> Adshell is not found${NC}\n"
+    printf "${YELLOW} ~~> Optional: Brings sugar to your terminal${NC}\n"
+    printf "${YELLOW} ~~> Checkout https://github.com/AdamWhittingham/adshell for details${NC}\n"
     while true; do
-      read -p "Do you wish to install {adshell}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {adshell}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname)" == "Darwin" ]; then
@@ -712,7 +731,7 @@ verify_adshell_setup() {
           break
           ;;
         [Nn]* )
-          printf "${YELLOW} ~~> Optional: Brings sugar to your terminal\n ~~> Checkout https://github.com/AdamWhittingham/adshell for details${NC}\n"
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
           break
           ;;
         * )
@@ -725,16 +744,17 @@ verify_adshell_setup() {
 
 improve_vim() {
   printf "${LIGHT_BLUE}Would you love to bring nice plugins to your Vim?${NC}\n"
+  printf "${YELLOW} ~~> Checkout https://github.com/AdamWhittingham/vim-config before using this Vim configuration${NC}\n"
+  printf "${YELLOW} ~~> Optional: Brings nice plugins to your Vim${NC}\n"
   while true; do
-    printf "${LIGHT_BLUE}Checout https://github.com/AdamWhittingham/vim-config before using this Vim configuration${NC}\n"
-    read -p "Do you wish to improve your {Vim}? [Yes/No] " yn
+    read -p " ~~> Do you wish to improve your {Vim}? [Yes/No] " yn
     case $yn in
       [Yy]* )
         install_nicer_vim_config
         break
         ;;
       [Nn]* )
-        printf "${YELLOW} ~~> Completely optional part${NC}\n"
+        printf "${YELLOW} ~~> Skipping installation${NC}\n"
         break
         ;;
       * )

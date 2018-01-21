@@ -116,13 +116,13 @@ install_maven_linux() {
   echo "export PATH=$M2:$PATH" >> ~/.bashrc
 }
 
-# -------------------- Centos ingredients -----------------------
-install_java_centos() {
+# -------------------- RedHat/Centos ingredients -----------------------
+install_java_redhat() {
   yum update
   yum install java-1.8.0-openjdk-devel
 }
 
-install_maven_centos() {
+install_maven_redhat() {
   wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
   tar xvf apache-maven-3.5.2-bin.tar.gz
   mv apache-maven-3.5.2  /usr/local/maven

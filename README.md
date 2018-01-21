@@ -22,14 +22,13 @@
   - [x] Ruby-on-Rails presence
   - [x] Adshell presence
 - [x] Removes duplicates from PATH variable
-- [-] Different checks, depending on OS:
+- [x] Different checks, depending on OS:
   - [x] Mac OS
-  - [x] GNU/Linux
-  - [ ] Red Hat/Centos
+  - [x] GNU/Linux/RedHat/Centos
 - [-] Downloads missing components:
   - [x] Mac OS
-  - [ ] GNU/Linux
-  - [ ] Red Hat/Centos
+  - [-] GNU/Linux
+  - [-] Red Hat/Centos
 
 ## Some improvements could be made in the future and extra functionality could be added
 - [ ] Think about project structure, as at the moment it is not well build

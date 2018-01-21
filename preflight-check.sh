@@ -9,13 +9,13 @@ NC='\033[0m'
 
 source flight-flavour.sh
 
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname -s)" == "Darwin" ]; then
     # Mac OS X
     macos_flavour
-elif [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*-elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
+elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
     # RedHat/Centos
     redhat_flavour
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+elif [ "$(uname -s)" == "Linux" ]; then
     # GNU/Linux
     linux_flavour
 fi

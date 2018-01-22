@@ -11,7 +11,7 @@ macos_flavour() {
   verify_bash_files_existence
   verify_homebrew_setup
 
-  verify_jenv_setup
+  verify_jenv_setup_macos
   verify_java_setup
   verify_maven_setup
   verify_miniconda_setup
@@ -41,7 +41,7 @@ linux_flavour() {
   deduplicate PATH
   verify_bash_files_existence
 
-  verify_jenv_setup
+  verify_jenv_setup_linux_redhat
   verify_java_setup
   verify_maven_setup
   verify_miniconda_setup
@@ -69,6 +69,7 @@ redhat_flavour() {
   deduplicate PATH
   verify_bash_files_existence
 
+  verify_jenv_setup_linux_redhat
   verify_java_setup
   verify_maven_setup
   verify_miniconda_setup

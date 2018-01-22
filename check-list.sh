@@ -712,7 +712,7 @@ verify_maven_setup() {
   fi
 }
 
-verify_jenv_setup() {
+verify_jenv_setup_linux_redhat() {
   printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
   if [[ -d "~/.jenv" ]]; then
     printf "${GREEN} --> jenv is found${NC}\n"
@@ -724,13 +724,34 @@ verify_jenv_setup() {
       read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
-              # Mac OS X
-              install_jenv_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_jenv_linux
-          fi
+          install_jenv_linux
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
+  fi
+}
+
+verify_jenv_setup_macos() {
+  printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
+  if [[ "$(brew list | grep jenv)" == "jenv" ]]; then
+    printf "${GREEN} --> jenv is found${NC}\n"
+  else
+    printf "${RED} --> jenv is not installed${NC}\n"
+    printf "${YELLOW} ~~> It is optional, but allows having multiple Java versions installed${NC}\n"
+    printf "${YELLOW} ~~> Checkout https://github.com/gcuisinier/jenv for details${NC}\n"
+    while true; do
+      read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          install_jenv_macos
           break
           ;;
         [Nn]* )

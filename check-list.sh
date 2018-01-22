@@ -172,7 +172,7 @@ deduplicate_simple() {
       x=${old_PATH%%:*}
       case $PATH: in
         *:"$x":*) ;;
-        *) PATH=$PATH:$x;;   
+        *) PATH=$PATH:$x;;
       esac
       old_PATH=${old_PATH#*:}
     done
@@ -185,7 +185,7 @@ deduplicate_simple() {
 
 deduplicate() {
   if type -p perl; then
-    deduplicate_with_perl
+    deduplicate_with_perl $1
   else
     deduplicate_simple
   fi

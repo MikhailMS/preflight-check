@@ -98,6 +98,55 @@ verify_wget_setup() {
   fi
 }
 
+verify_bash_files_existence() {
+  printf "${LIGHT_BLUE}Checking if .bash files exists${NC}\n"
+  if [[ -f ~/.bash_profile ]]; then
+    printf "${GREEN} --> ~/.bash_profile exists, nice${NC}\n"
+  else
+    printf "${RED} --> ~/.bash_profile is missing${NC}\n"
+    while true; do
+      read -p " ~~> Do you wish to create {~/.bash_profile}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          touch ~/.bash_profile
+          break
+          ;;
+        [Nn]* )
+          printf "${RED} ~~> Make sure to create {~/.bash_profile} later${NC}\n"
+          printf "${YELLOW} ~~> Skipping creation${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
+  fi
+
+  if [[ -f ~/.bashrc ]]; then
+    printf "${GREEN} --> ~/.bashrc exists, nice${NC}\n"
+  else
+    printf "${RED} --> ~/.bashrc is missing${NC}\n"
+    while true; do
+      read -p " ~~> Do you wish to create {~/.bashrc}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          touch ~/.bashrc
+          break
+          ;;
+        [Nn]* )
+          printf "${RED} ~~> Make sure to create {~/.bashrc} later${NC}\n"
+          printf "${YELLOW} ~~> Skipping creation${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
+  fi
+}
+
 get_var () {
     eval 'printf "%s\n" "${'"$1"'}"'
 }
@@ -648,6 +697,39 @@ verify_maven_setup() {
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_maven_centos
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
+  fi
+}
+
+verify_jenv_setup() {
+  printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
+  if [[ -d "~/.jenv" ]]; then
+    printf "${GREEN} --> jenv is found${NC}\n"
+  else
+    printf "${RED} --> jenv is not installed${NC}\n"
+    printf "${YELLOW} ~~> It is optional, but allows having multiple Java versions installed${NC}\n"
+    printf "${YELLOW} ~~> Checkout https://github.com/gcuisinier/jenv for details${NC}\n"
+    while true; do
+      read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_jenv_macos
+          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+              # GNU/Linux
+              install_jenv_linux
           fi
           break
           ;;

@@ -21,6 +21,8 @@
   - [x] gem presence
   - [x] Ruby-on-Rails presence
   - [x] Adshell presence
+  - [x] jenv presence
+  - [x] bash_profile, bashrc files presence
 - [x] Removes duplicates from PATH variable
 - [x] Different checks, depending on OS:
   - [x] Mac OS

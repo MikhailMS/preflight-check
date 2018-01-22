@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # -------------------- Mac OS ingredients -----------------------
+install_jenv_macos() {
+  brew install jenv
+}
+
 install_java_macos() {
   printf "${LIGHT_BLUE}Installing Java 8${NC}\n"
   brew tap caskroom/versions 2>/dev/null
@@ -100,6 +104,13 @@ install_adshell_macos() {
 }
 
 # -------------------- GNU/Linux ingredients --------------------
+install_jenv_linux() {
+  git clone https://github.com/gcuisinier/jenv.git ~/.jenv
+  echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bash_profile
+  echo 'eval "$(jenv init -)"' >> ~/.bash_profile
+  printf "${GREEN} :: Configure JVM in jenv      --> 'jenv add /path/to/java/home'${NC}\n"
+  printf "${GREEN} :: Configure which JVM to use --> 'jenv global oracle-1.7.0' or 'jenv local oracle-1.7.0' or 'jenv shell oracle-1.7.0'${NC}\n"
+}
 install_java_linux() {
   apt-get update
   apt-get install openjdk-8-jre

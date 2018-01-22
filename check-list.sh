@@ -714,7 +714,7 @@ verify_maven_setup() {
 
 verify_jenv_setup_linux_redhat() {
   printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
-  if [[ -d "~/.jenv" ]]; then
+  if [[ -d ~/.jenv ]]; then
     printf "${GREEN} --> jenv is found${NC}\n"
   else
     printf "${RED} --> jenv is not installed${NC}\n"
@@ -798,7 +798,7 @@ verify_iterm_setup() {
 
 verify_adshell_setup() {
   printf "${LIGHT_BLUE}Checking adshell setup${NC}\n"
-  if [[ -d "~/.adshell" ]]; then
+  if [[ -d ~/.adshell ]]; then
     printf "${GREEN} --> Adshell is found on the machine${NC}\n"
     while true; do
       read -p "If you did not yet install {adshell}, would you like to do it now? [Yes/No] " yn

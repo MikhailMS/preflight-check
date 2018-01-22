@@ -38,6 +38,9 @@
 
 ## To run the script, execute command
   `git clone https://github.com/MikhailMS/preflight-check preflight-check && cd preflight-check && . preflight-check.sh`
+  If git command is not found, try `curl -LO https://github.com/MikhailMS/preflight-check/archive/master.zip` and then
+  `unzip master.zip && cd preflight-check-master && . preflight-check.sh`
+
 ## To get an update once downloaded, execute command, when in `preflight-check` folder
   `git pull`
 

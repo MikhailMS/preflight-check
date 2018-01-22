@@ -154,13 +154,41 @@ set_var () {
     eval "$1=\"\$2\""
 }
 
+deduplicate_with_perl() {
+  printf "${LIGHT_BLUE}PATH Deduplication${NC}\n"
+  pathvar_name="$1"
+  pathvar_value="$(get_var "$pathvar_name")"
+  deduped_path="$(perl -e 'print join(":",grep { not $seen{$_}++ } split(/:/, $ARGV[0]))' "$pathvar_value")"
+  set_var "$pathvar_name" "$deduped_path"
+  printf "${GREEN} --> Completed${NC}\n"
+}
+
+deduplicate_simple() {
+  printf "${LIGHT_BLUE}PATH Deduplication${NC}\n"
+
+  if [ -n "$PATH" ]; then
+    old_PATH=$PATH:; PATH=
+    while [ -n "$old_PATH" ]; do
+      x=${old_PATH%%:*}       # the first remaining entry
+      case $PATH: in
+        *:"$x":*) ;;         # already there
+        *) PATH=$PATH:$x;;    # not there yet
+      esac
+      old_PATH=${old_PATH#*:}
+    done
+    PATH=${PATH#:}
+    unset old_PATH x
+  fi
+
+  printf "${GREEN} --> Completed${NC}\n"
+}
+
 deduplicate() {
-    printf "${LIGHT_BLUE}PATH Deduplication${NC}\n"
-    pathvar_name="$1"
-    pathvar_value="$(get_var "$pathvar_name")"
-    deduped_path="$(perl -e 'print join(":",grep { not $seen{$_}++ } split(/:/, $ARGV[0]))' "$pathvar_value")"
-    set_var "$pathvar_name" "$deduped_path"
-    printf "${GREEN} --> Completed${NC}\n"
+  if type -p perl; then
+    deduplicate_with_perl
+  else
+    deduplicate_simple
+  fi
 }
 
 verify_java_setup() {

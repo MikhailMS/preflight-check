@@ -801,7 +801,7 @@ verify_adshell_setup() {
   if [[ -d ~/.adshell ]]; then
     printf "${GREEN} --> Adshell is found on the machine${NC}\n"
     while true; do
-      read -p "If you did not yet install {adshell}, would you like to do it now? [Yes/No] " yn
+      read -p " ~~> If you did not yet install {adshell}, would you like to do it now? [Yes/No] " yn
       case $yn in
         [Yy]* )
           ~/.adshell/install

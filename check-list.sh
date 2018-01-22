@@ -73,15 +73,15 @@ verify_wget_setup() {
       read -p " ~~> Do you wish to install {wget}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_wget_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_wget_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # Red Hat dist, Centos
               install_wget_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_wget_linux
           fi
           break
           ;;
@@ -205,15 +205,15 @@ verify_java_setup() {
       read -p " ~~> Do you wish to install {Java}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_java_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_java_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_java_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_java_linux
           fi
           break
           ;;
@@ -251,15 +251,15 @@ verify_miniconda_setup() {
       read -p " ~~> Do you wish to install {Miniconda}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_miniconda_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_miniconda_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # Red Hat dist, Centos
               install_miniconda_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_miniconda_linux
           fi
           break
           ;;
@@ -288,15 +288,15 @@ verify_python_setup() {
       read -p " ~~> Do you wish to install {Python}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_python_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_python_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_python_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_python_linux
           fi
           break
           ;;
@@ -325,15 +325,15 @@ verify_rbenv_setup() {
       read -p " ~~> Do you wish to install {rbenv}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_rbenv_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_rbenv_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_rbenv_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_rbenv_linux
           fi
           break
           ;;
@@ -365,15 +365,15 @@ verify_ruby_setup() {
       read -p " ~~> Do you wish to install {Ruby}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_ruby_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_ruby_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_ruby_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_ruby_linux
           fi
           break
           ;;
@@ -472,15 +472,15 @@ verify_docker_setup() {
       read -p " ~~> Do you wish to install {Docker}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_docker_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_docker_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_docker_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_docker_linux
           fi
           break
           ;;
@@ -509,15 +509,15 @@ verify_vagrant_setup() {
       read -p " ~~> Do you wish to install {Vagrant}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_vagrant_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_vagrant_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_vagrant_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_vagrant_linux
           fi
           break
           ;;
@@ -550,15 +550,15 @@ verify_chef_setup() {
       read -p " ~~> Do you wish to install {Chef}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_chef_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_chef_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_chef_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_chef_linux
           fi
           break
           ;;
@@ -587,15 +587,15 @@ verify_git_setup() {
       read -p " ~~> Do you wish to install {Git}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_git_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_git_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_git_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_git_linux
           fi
           break
           ;;
@@ -624,15 +624,15 @@ verify_vim_setup() {
       read -p " ~~> Do you wish to install {Vim}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_vim_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_vim_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_vim_redhat
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_vim_linux
           fi
           break
           ;;
@@ -716,15 +716,15 @@ verify_maven_setup() {
       read -p " ~~> Do you wish to install {Maven}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
+          if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
               install_maven_macos
-          elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-              # GNU/Linux
-              install_maven_linux
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_maven_centos
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              install_maven_linux
           fi
           break
           ;;

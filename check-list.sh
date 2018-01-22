@@ -155,7 +155,7 @@ set_var () {
 }
 
 deduplicate_with_perl() {
-  printf "${LIGHT_BLUE}PATH Deduplication${NC}\n"
+  printf "${LIGHT_BLUE}PATH Deduplication (Advanced)${NC}\n"
   pathvar_name="$1"
   pathvar_value="$(get_var "$pathvar_name")"
   deduped_path="$(perl -e 'print join(":",grep { not $seen{$_}++ } split(/:/, $ARGV[0]))' "$pathvar_value")"
@@ -164,15 +164,15 @@ deduplicate_with_perl() {
 }
 
 deduplicate_simple() {
-  printf "${LIGHT_BLUE}PATH Deduplication${NC}\n"
+  printf "${LIGHT_BLUE}PATH Deduplication (Simple)${NC}\n"
 
   if [ -n "$PATH" ]; then
     old_PATH=$PATH:; PATH=
     while [ -n "$old_PATH" ]; do
-      x=${old_PATH%%:*}       # the first remaining entry
+      x=${old_PATH%%:*}
       case $PATH: in
-        *:"$x":*) ;;         # already there
-        *) PATH=$PATH:$x;;    # not there yet
+        *:"$x":*) ;;
+        *) PATH=$PATH:$x;;   
       esac
       old_PATH=${old_PATH#*:}
     done

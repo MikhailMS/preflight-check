@@ -786,7 +786,7 @@ verify_maven_setup() {
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               if type -p wget; then
-                install_maven_centos
+                install_maven_redhat
               else
                 printf "${RED} ~~> You need to install wget before you can install {Maven}${NC}\n"
               fi

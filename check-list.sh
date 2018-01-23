@@ -950,27 +950,31 @@ verify_adshell_setup() {
 }
 
 improve_vim() {
-  printf "${LIGHT_BLUE}Would you love to bring nice plugins to your Vim?${NC}\n"
-  printf "${YELLOW} ~~> Checkout https://github.com/AdamWhittingham/vim-config before using this Vim configuration${NC}\n"
-  printf "${YELLOW} ~~> Optional: Brings nice plugins to your Vim${NC}\n"
-  if type -p git; then
-    while true; do
-      read -p " ~~> Do you wish to improve your {Vim}? [Yes/No] " yn
-      case $yn in
-        [Yy]* )
-          install_nicer_vim_config
-          break
-          ;;
-        [Nn]* )
-          printf "${YELLOW} ~~> Skipping installation${NC}\n"
-          break
-          ;;
-        * )
-          echo "Please answer yes or no\n"
-          ;;
-      esac
-    done
+  if type -p vim; then
+    printf "${LIGHT_BLUE}Would you love to bring nice plugins to your Vim?${NC}\n"
+    printf "${YELLOW} ~~> Checkout https://github.com/AdamWhittingham/vim-config before using this Vim configuration${NC}\n"
+    printf "${YELLOW} ~~> Optional: Brings nice plugins to your Vim${NC}\n"
+    if type -p git; then
+      while true; do
+        read -p " ~~> Do you wish to improve your {Vim}? [Yes/No] " yn
+        case $yn in
+          [Yy]* )
+            install_nicer_vim_config
+            break
+            ;;
+          [Nn]* )
+            printf "${YELLOW} ~~> Skipping installation${NC}\n"
+            break
+            ;;
+          * )
+            echo "Please answer yes or no\n"
+            ;;
+        esac
+      done
+    else
+      printf "${RED} ~~> You need to install Git before you can install {Vim config with nice plugins}${NC}\n"
+    fi
   else
-    printf "${RED} ~~> You need to install Git before you can install {Vim config with nice plugins}${NC}\n"
+    printf "${RED} ~~> You need to have Vim before you can install {Vim config with nice plugins}${NC}\n"
   fi
 }

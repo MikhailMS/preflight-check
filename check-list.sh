@@ -808,37 +808,6 @@ verify_maven_setup() {
   fi
 }
 
-verify_jenv_setup_linux_redhat() {
-  printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
-  if [[ -d ~/.jenv ]]; then
-    printf "${GREEN} --> jenv is found${NC}\n"
-  else
-    printf "${RED} --> jenv is not installed${NC}\n"
-    printf "${YELLOW} ~~> It is optional, but allows having multiple Java versions installed${NC}\n"
-    printf "${YELLOW} ~~> Checkout https://github.com/gcuisinier/jenv for details${NC}\n"
-    if type -p git; then
-      while true; do
-        read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
-        case $yn in
-          [Yy]* )
-            install_jenv
-            break
-            ;;
-          [Nn]* )
-            printf "${YELLOW} ~~> Skipping installation${NC}\n"
-            break
-            ;;
-          * )
-            echo "Please answer yes or no\n"
-            ;;
-        esac
-      done
-    else
-      printf "${RED} ~~> You need to install Git before you can install {jenv}${NC}\n"
-    fi
-  fi
-}
-
 verify_jenv_setup_macos() {
   printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
   if type -p brew; then
@@ -852,7 +821,28 @@ verify_jenv_setup_macos() {
         read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
         case $yn in
           [Yy]* )
-            install_jenv_macos
+          if [ "$(uname -s)" == "Darwin" ]; then
+              # Mac OS X
+              if type -p brew; then
+                install_maven_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {jenv}${NC}\n"
+              fi
+          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
+              # RedHat/Centos
+              if type -p git; then
+                install_jenv_redhat
+              else
+                printf "${RED} ~~> You need to install Git before you can install {jenv}${NC}\n"
+              fi
+          elif [ "$(uname -s)" == "Linux" ]; then
+              # GNU/Linux
+              if type -p git; then
+                install_jenv_linux
+              else
+                printf "${RED} ~~> You need to install Git before you can install {jenv}${NC}\n"
+              fi
+          fi
             break
             ;;
           [Nn]* )

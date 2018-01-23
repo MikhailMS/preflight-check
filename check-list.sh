@@ -808,7 +808,7 @@ verify_maven_setup() {
   fi
 }
 
-verify_jenv_setup_macos() {
+verify_jenv_setup() {
   printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
   if type -p brew; then
     if [[ "$(brew list | grep jenv)" == "jenv" ]]; then

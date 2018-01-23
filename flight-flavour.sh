@@ -45,7 +45,7 @@ linux_flavour() {
   verify_git_setup
   verify_wget_setup
 
-  verify_jenv_setup_linux_redhat
+  verify_jenv_setup
   verify_java_setup
   verify_maven_setup
   verify_miniconda_setup
@@ -73,8 +73,8 @@ redhat_flavour() {
 
   verify_git_setup
   verify_wget_setup
-  
-  verify_jenv_setup_linux_redhat
+
+  verify_jenv_setup
   verify_java_setup
   verify_maven_setup
   verify_miniconda_setup

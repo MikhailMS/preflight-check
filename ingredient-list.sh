@@ -344,7 +344,7 @@ install_nicer_vim_config() {
 }
 
 install_miniconda() {
-  if [ `getconf LONG_BIT` = "64"]; then
+  if [ "$(getconf LONG_BIT)" == "64" ]; then
     printf "${LIGHT_BLUE} --> Installing Miniconda 64bit${NC}\n"
     wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && bash Miniconda2-latest-Linux-x86_64.sh
   else

@@ -462,36 +462,40 @@ verify_gem_setup() {
 
 verify_rails_setup() {
   printf "${LIGHT_BLUE}Checking Ruby-on-Rails setup${NC}\n"
-  rails_version=`gem list | grep  '^rails ' | awk '{print $2}' | tr -d '()'`
-  if [[ ! -z "$rails_version" ]]; then
-    if [[ "$rails_version" < "5.1.4" ]]; then
-      printf "${YELLOW} --> Current rails version $rails_version, when recommended is 5.1.4${NC}\n"
+  if type -p gem; then
+    rails_version=`gem list | grep  '^rails ' | awk '{print $2}' | tr -d '()'`
+    if [[ ! -z "$rails_version" ]]; then
+      if [[ "$rails_version" < "5.1.4" ]]; then
+        printf "${YELLOW} --> Current rails version $rails_version, when recommended is 5.1.4${NC}\n"
+      else
+        printf "${GREEN} --> Ruby-on-Rails version $rails_version is installed${NC}\n"
+      fi
     else
-      printf "${GREEN} --> Ruby-on-Rails version $rails_version is installed${NC}\n"
+      printf "${RED} --> Ruby-on-Rails is not installed${NC}\n"
+      printf "${YELLOW} ~~> Ruby-on-Rails is optional, unless you're aiming to develop web apps${NC}\n"
+      if type -p gem; then
+        while true; do
+          read -p " ~~> Do you wish to install {Ruby-on-Rails}? [Yes/No] " yn
+          case $yn in
+            [Yy]* )
+              install_rails
+              break
+              ;;
+            [Nn]* )
+              printf "${YELLOW} ~~> Skipping installation${NC}\n"
+              break
+              ;;
+            * )
+              echo "Please answer yes or no\n"
+              ;;
+          esac
+        done
+      else
+        printf "${RED} ~~> You need to install gem before you can install {Ruby-on-Rails}${NC}\n"
+      fi
     fi
   else
-    printf "${RED} --> Ruby-on-Rails is not installed${NC}\n"
-    printf "${YELLOW} ~~> Ruby-on-Rails is optional, unless you're aiming to develop web apps${NC}\n"
-    if type -p gem; then
-      while true; do
-        read -p " ~~> Do you wish to install {Ruby-on-Rails}? [Yes/No] " yn
-        case $yn in
-          [Yy]* )
-            install_rails
-            break
-            ;;
-          [Nn]* )
-            printf "${YELLOW} ~~> Skipping installation${NC}\n"
-            break
-            ;;
-          * )
-            echo "Please answer yes or no\n"
-            ;;
-        esac
-      done
-    else
-      printf "${RED} ~~> You need to install gem before you can install {Ruby-on-Rails}${NC}\n"
-    fi
+    printf "${YELLOW} ~~> There is no gem installed, so you probably don't have Rails installed${NC}\n"
   fi
 }
 

@@ -213,7 +213,7 @@ install_maven_redhat() {
   printf "${LIGHT_BLUE} --> Installing Maven${NC}\n"
   wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
   tar xvf apache-maven-3.5.2-bin.tar.gz
-  mv apache-maven-3.5.2  /usr/local/maven
+  sudo mv apache-maven-3.5.2  /usr/local/maven
   echo "export M2_HOME=/usr/local/apache-maven" >> ~/.bashrc
   echo "export M2=$M2_HOME/bin" >> ~/.bashrc
   echo "export PATH=$M2:$PATH" >> ~/.bashrc
@@ -245,11 +245,11 @@ install_rbenv_redhat() {
   yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
   cd ~/
   git clone git://github.com/sstephenson/rbenv.git .rbenv
-  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-  echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+  echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
   git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-  echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profile
+  echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
 
   if type -p ruby; then
     echo ""

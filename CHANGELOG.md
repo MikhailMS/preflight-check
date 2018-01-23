@@ -25,3 +25,4 @@
 - [x] Updated README
 - [x] Fixed an issue with Vim installation - I deleted vim after it's been installed :/
 - [x] Spotted wrong method name to install Maven on Redhat/Centos systems
+- [x] Fixed Maven installation

@@ -30,3 +30,4 @@
 - [x] Fixed rbenv installation
 - [x] Fixed Miniconda installation
 - [x] Added source_bash_file method to complete setup after script finishes
+- [x] Increased Ruby version to 2.4.2

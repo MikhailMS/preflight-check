@@ -156,13 +156,16 @@ install_vim_linux() {
 
 install_rbenv_linux() {
   printf "${LIGHT_BLUE} --> Installing rbenv${NC}\n"
-  apt-get update
-  apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+  sudo apt-get update
+  sudo apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
   echo 'eval "$(rbenv init -)"' >> ~/.bashrc
   source ~/.bashrc
+
   git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+  curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 
   if type -p ruby; then
     echo ""
@@ -186,8 +189,6 @@ install_rbenv_linux() {
       esac
     done
   fi
-
-  curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 }
 
 install_ruby_linux() {
@@ -263,7 +264,7 @@ install_vim_redhat() {
 
 install_rbenv_redhat() {
   printf "${LIGHT_BLUE} --> Installing rbenv${NC}\n"
-  yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
+  sudo yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
   cd ~/
   git clone git://github.com/sstephenson/rbenv.git .rbenv
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -271,6 +272,9 @@ install_rbenv_redhat() {
 
   git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
   echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+  source ~/.bashrc
+
+  curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 
   if type -p ruby; then
     echo ""
@@ -294,30 +298,28 @@ install_rbenv_redhat() {
       esac
     done
   fi
-
-  curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 }
 
 install_ruby_redhat() {
   printf "${LIGHT_BLUE} --> Installing Ruby${NC}\n"
-  yum install ruby
+  sudo yum install ruby
 }
 
 install_docker_redhat() {
   printf "${LIGHT_BLUE} --> Installing Docker-CE${NC}\n"
-  yum install -y yum-utils device-mapper-persistent-data lvm2
-  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-  yum install docker-ce
+  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+  sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  sudo yum install docker-ce
 }
 
 install_vagrant_redhat() {
   printf "${LIGHT_BLUE} --> Installing Vagrant${NC}\n"
-  yum -y install gcc dkms make qt libgomp patch
-  yum -y install kernel-headers kernel-devel binutils glibc-headers glibc-devel font-forge
-  yum-config-manager --add-repo http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
-  yum install -y VirtualBox-5.1
+  sudo yum -y install gcc dkms make qt libgomp patch
+  sudo yum -y install kernel-headers kernel-devel binutils glibc-headers glibc-devel font-forge
+  sudo yum-config-manager --add-repo http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+  sudo yum install -y VirtualBox-5.1
 
-  yum -y install https://releases.hashicorp.com/vagrant/1.9.6/vagrant_1.9.6_i686.rpm
+  sudo yum -y install https://releases.hashicorp.com/vagrant/1.9.6/vagrant_1.9.6_i686.rpm
 }
 
 # -------------------- Shared ingredients -----------------------

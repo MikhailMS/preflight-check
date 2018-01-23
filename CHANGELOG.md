@@ -27,3 +27,4 @@
 - [x] Spotted wrong method name to install Maven on Redhat/Centos systems
 - [x] Fixed Maven installation
 - [x] Fixed jenv installation
+- [x] Fixed rbenv installation

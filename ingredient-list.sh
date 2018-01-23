@@ -176,7 +176,7 @@ install_rbenv_linux() {
       esac
     done
   fi
-  
+
   curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 }
 
@@ -234,11 +234,10 @@ install_vim_redhat() {
   printf "${LIGHT_BLUE} --> Installing Vim${NC}\n"
   yum install gcc git ncurses-devel
   git clone https://github.com/vim/vim.git
-  cd vim/src
+  mv vim ~/.vim
+  cd ~/.vim/src
   make
   make install
-  cd .. && cd ..
-  rm -r vim
 }
 
 install_rbenv_redhat() {

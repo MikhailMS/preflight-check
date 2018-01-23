@@ -36,11 +36,11 @@
 - [ ] Think about project structure, as at the moment it is not well build
 - [ ] Erase duplicated code as much as possible
 
-## To run the script, execute command
+## To run the script, make sure to run it with sudo prefix, or user is privileged with sudo 
   1. `git clone https://github.com/MikhailMS/preflight-check preflight-check && cd preflight-check && . preflight-check.sh`
-  
-  If git command is not found, try 
-  
+
+  If git command is not found, try
+
   1. `curl -LO https://github.com/MikhailMS/preflight-check/archive/master.zip`
   2. `unzip master.zip && cd preflight-check-master && . preflight-check.sh`
 

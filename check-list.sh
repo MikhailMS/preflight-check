@@ -75,7 +75,11 @@ verify_wget_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_wget_macos
+              if type -p brew; then
+                install_wget_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {wget}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # Red Hat dist, Centos
               install_wget_redhat
@@ -207,7 +211,11 @@ verify_java_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_java_macos
+              if type -p brew; then
+                install_java_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {Java}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_java_redhat
@@ -252,14 +260,18 @@ verify_miniconda_setup() {
       case $yn in
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
-              # Mac OS X
+            # Mac OS X
+            if type -p wget; then
               install_miniconda_macos
-          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
-              # Red Hat dist, Centos
-              install_miniconda_redhat
-          elif [ "$(uname -s)" == "Linux" ]; then
-              # GNU/Linux
-              install_miniconda_linux
+            else
+              printf "${RED} ~~> You need to install wget before you can install {Miniconda}${NC}\n"
+            fi
+          else
+            if type -p wget; then
+              install_miniconda
+            else
+              printf "${RED} ~~> You need to install wget before you can install {Miniconda}${NC}\n"
+            fi
           fi
           break
           ;;
@@ -327,13 +339,25 @@ verify_rbenv_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_rbenv_macos
+              if type -p brew; then
+                install_rbenv_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {rbenv}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
-              install_rbenv_redhat
+              if type -p git; then
+                install_rbenv_redhat
+              else
+                printf "${RED} ~~> You need to install Git before you can install {rbenv}${NC}\n"
+              fi
           elif [ "$(uname -s)" == "Linux" ]; then
               # GNU/Linux
-              install_rbenv_linux
+              if type -p git; then
+                install_rbenv_linux
+              else
+                printf "${RED} ~~> You need to install Git before you can install {rbenv}${NC}\n"
+              fi
           fi
           break
           ;;
@@ -367,7 +391,11 @@ verify_ruby_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_ruby_macos
+              if type -p brew; then
+                install_ruby_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {Ruby}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_ruby_redhat
@@ -398,22 +426,26 @@ verify_bundler_setup() {
   else
     printf "${RED} --> No Bundler executable is found${NC}\n"
     printf "${YELLOW} ~~> It is optional to install bundler, but it takes care of managing ruby gems${NC}\n"
-    while true; do
-      read -p " ~~> Do you wish to install {bundler}? [Yes/No] " yn
-      case $yn in
-        [Yy]* )
-          install_bundler
-          break
-          ;;
-        [Nn]* )
-          printf "${YELLOW} ~~> Skipping installation${NC}\n"
-          break
-          ;;
-        * )
-          echo "Please answer yes or no\n"
-          ;;
-      esac
-    done
+    if type -p gem; then
+      while true; do
+        read -p " ~~> Do you wish to install {bundler}? [Yes/No] " yn
+        case $yn in
+          [Yy]* )
+            install_bundler
+            break
+            ;;
+          [Nn]* )
+            printf "${YELLOW} ~~> Skipping installation${NC}\n"
+            break
+            ;;
+          * )
+            echo "Please answer yes or no\n"
+            ;;
+        esac
+      done
+    else
+      printf "${RED} ~~> You need to install gem before you can install {Bundler}${NC}\n"
+    fi
   fi
 }
 
@@ -440,22 +472,26 @@ verify_rails_setup() {
   else
     printf "${RED} --> Ruby-on-Rails is not installed${NC}\n"
     printf "${YELLOW} ~~> Ruby-on-Rails is optional, unless you're aiming to develop web apps${NC}\n"
-    while true; do
-      read -p " ~~> Do you wish to install {Ruby-on-Rails}? [Yes/No] " yn
-      case $yn in
-        [Yy]* )
-          install_rails
-          break
-          ;;
-        [Nn]* )
-          printf "${YELLOW} ~~> Skipping installation${NC}\n"
-          break
-          ;;
-        * )
-          echo "Please answer yes or no\n"
-          ;;
-      esac
-    done
+    if type -p gem; then
+      while true; do
+        read -p " ~~> Do you wish to install {Ruby-on-Rails}? [Yes/No] " yn
+        case $yn in
+          [Yy]* )
+            install_rails
+            break
+            ;;
+          [Nn]* )
+            printf "${YELLOW} ~~> Skipping installation${NC}\n"
+            break
+            ;;
+          * )
+            echo "Please answer yes or no\n"
+            ;;
+        esac
+      done
+    else
+      printf "${RED} ~~> You need to install gem before you can install {Ruby-on-Rails}${NC}\n"
+    fi
   fi
 }
 
@@ -474,7 +510,11 @@ verify_docker_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_docker_macos
+              if type -p wget; then
+                install_docker_macos
+              else
+                printf "${RED} ~~> You need to install wget before you can install {Docker}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_docker_redhat
@@ -511,7 +551,11 @@ verify_vagrant_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_vagrant_macos
+              if type -p brew; then
+                install_vagrant_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {Vagrant}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_vagrant_redhat
@@ -536,29 +580,29 @@ verify_vagrant_setup() {
 verify_chef_setup() {
   printf "${LIGHT_BLUE}Checking Chef setup${NC}\n"
   if type -p chef-client; then
-    printf "${GREEN} --> Found Chef executable in PATH${NC}\n"
+    printf "${GREEN} --> Found chef-client executable in PATH${NC}\n"
     chef_version=`chef-client -version 2>/dev/null | awk '{print $2}'`
     if [[ ! -z "$chef_version// " ]];then
-      printf "${GREEN} --> Chef version $chef_version is installed${NC}\n"
+      printf "${GREEN} --> chef-client version $chef_version is installed${NC}\n"
     else
-      printf "${YELLOW} --> Chef is found in PATH, but seems not being completely setup. Run 'chef-client' or 'chef-client -version' to see error message${NC}\n"
+      printf "${YELLOW} --> chef-client is found in PATH, but seems not being completely setup. Run 'chef-client' or 'chef-client -version' to see error message${NC}\n"
     fi
   else
-    printf "${RED} --> No Chef executable is found${NC}\n"
-    printf "${YELLOW} ~~> Chef is optional installation${NC}\n"
+    printf "${RED} --> No chef-client executable is found${NC}\n"
+    printf "${YELLOW} ~~> chef-client is optional installation${NC}\n"
     while true; do
-      read -p " ~~> Do you wish to install {Chef}? [Yes/No] " yn
+      read -p " ~~> Do you wish to install {chef-client}? [Yes/No] " yn
       case $yn in
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_chef_macos
-          elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
-              # RedHat/Centos
-              install_chef_redhat
-          elif [ "$(uname -s)" == "Linux" ]; then
-              # GNU/Linux
-              install_chef_linux
+              if type -p wget; then
+                install_chef_macos
+              else
+                printf "${RED} ~~> You need to install wget before you can install {chef-client}${NC}\n"
+              fi
+          else
+              install_chef
           fi
           break
           ;;
@@ -589,7 +633,11 @@ verify_git_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_git_macos
+              if type -p brew; then
+                install_git_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {Git}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
               install_git_redhat
@@ -626,10 +674,18 @@ verify_vim_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_vim_macos
+              if type -p brew; then
+                install_vim_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {Vim}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
-              install_vim_redhat
+              if type -p git; then
+                install_vim_redhat
+              else
+                printf "${RED} ~~> You need to install Git before you can install {Vim}${NC}\n"
+              fi
           elif [ "$(uname -s)" == "Linux" ]; then
               # GNU/Linux
               install_vim_linux
@@ -718,10 +774,18 @@ verify_maven_setup() {
         [Yy]* )
           if [ "$(uname -s)" == "Darwin" ]; then
               # Mac OS X
-              install_maven_macos
+              if type -p brew; then
+                install_maven_macos
+              else
+                printf "${RED} ~~> You need to install Homebrew before you can install {Maven}${NC}\n"
+              fi
           elif [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "centos" ] || [ "$(rpm -qa \*elease\* | grep -Ei 'redhat|centos' | cut -d '-' -f1)" == "redhat" ]; then
               # RedHat/Centos
-              install_maven_centos
+              if type -p wget; then
+                install_maven_centos
+              else
+                printf "${RED} ~~> You need to install wget before you can install {Maven}${NC}\n"
+              fi
           elif [ "$(uname -s)" == "Linux" ]; then
               # GNU/Linux
               install_maven_linux
@@ -748,49 +812,57 @@ verify_jenv_setup_linux_redhat() {
     printf "${RED} --> jenv is not installed${NC}\n"
     printf "${YELLOW} ~~> It is optional, but allows having multiple Java versions installed${NC}\n"
     printf "${YELLOW} ~~> Checkout https://github.com/gcuisinier/jenv for details${NC}\n"
-    while true; do
-      read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
-      case $yn in
-        [Yy]* )
-          install_jenv_linux
-          break
-          ;;
-        [Nn]* )
-          printf "${YELLOW} ~~> Skipping installation${NC}\n"
-          break
-          ;;
-        * )
-          echo "Please answer yes or no\n"
-          ;;
-      esac
-    done
+    if type -p git; then
+      while true; do
+        read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
+        case $yn in
+          [Yy]* )
+            install_jenv
+            break
+            ;;
+          [Nn]* )
+            printf "${YELLOW} ~~> Skipping installation${NC}\n"
+            break
+            ;;
+          * )
+            echo "Please answer yes or no\n"
+            ;;
+        esac
+      done
+    else
+      printf "${RED} ~~> You need to install Git before you can install {jenv}${NC}\n"
+    fi
   fi
 }
 
 verify_jenv_setup_macos() {
   printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
-  if [[ "$(brew list | grep jenv)" == "jenv" ]]; then
-    printf "${GREEN} --> jenv is found${NC}\n"
+  if type -p brew; then
+    if [[ "$(brew list | grep jenv)" == "jenv" ]]; then
+      printf "${GREEN} --> jenv is found${NC}\n"
+    else
+      printf "${RED} --> jenv is not installed${NC}\n"
+      printf "${YELLOW} ~~> It is optional, but allows having multiple Java versions installed${NC}\n"
+      printf "${YELLOW} ~~> Checkout https://github.com/gcuisinier/jenv for details${NC}\n"
+      while true; do
+        read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
+        case $yn in
+          [Yy]* )
+            install_jenv_macos
+            break
+            ;;
+          [Nn]* )
+            printf "${YELLOW} ~~> Skipping installation${NC}\n"
+            break
+            ;;
+          * )
+            echo "Please answer yes or no\n"
+            ;;
+        esac
+      done
+    fi
   else
-    printf "${RED} --> jenv is not installed${NC}\n"
-    printf "${YELLOW} ~~> It is optional, but allows having multiple Java versions installed${NC}\n"
-    printf "${YELLOW} ~~> Checkout https://github.com/gcuisinier/jenv for details${NC}\n"
-    while true; do
-      read -p " ~~> Do you wish to install {jenv}? [Yes/No] " yn
-      case $yn in
-        [Yy]* )
-          install_jenv_macos
-          break
-          ;;
-        [Nn]* )
-          printf "${YELLOW} ~~> Skipping installation${NC}\n"
-          break
-          ;;
-        * )
-          echo "Please answer yes or no\n"
-          ;;
-      esac
-    done
+    printf "${RED} ~~> {jenv} is managed by Homebrew on Mac OS. Install Homebrew first${NC}\n"
   fi
 }
 
@@ -848,17 +920,45 @@ verify_adshell_setup() {
     printf "${RED} --> Adshell is not found${NC}\n"
     printf "${YELLOW} ~~> Optional: Brings sugar to your terminal${NC}\n"
     printf "${YELLOW} ~~> Checkout https://github.com/AdamWhittingham/adshell for details${NC}\n"
+    if type -p git; then
+      while true; do
+        read -p " ~~> Do you wish to install {adshell}? [Yes/No] " yn
+        case $yn in
+          [Yy]* )
+            if [ "$(uname)" == "Darwin" ]; then
+              # Mac OS X
+              install_adshell_macos
+            else
+              # RedHat/Centos7/Linux
+              install_adshell
+            fi
+            break
+            ;;
+          [Nn]* )
+            printf "${YELLOW} ~~> Skipping installation${NC}\n"
+            break
+            ;;
+          * )
+            echo "Please answer yes or no\n"
+            ;;
+        esac
+      done
+    else
+      printf "${RED} ~~> You need to install Git before you can install {Adshell}${NC}\n"
+    fi
+  fi
+}
+
+improve_vim() {
+  printf "${LIGHT_BLUE}Would you love to bring nice plugins to your Vim?${NC}\n"
+  printf "${YELLOW} ~~> Checkout https://github.com/AdamWhittingham/vim-config before using this Vim configuration${NC}\n"
+  printf "${YELLOW} ~~> Optional: Brings nice plugins to your Vim${NC}\n"
+  if type -p git; then
     while true; do
-      read -p " ~~> Do you wish to install {adshell}? [Yes/No] " yn
+      read -p " ~~> Do you wish to improve your {Vim}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          if [ "$(uname)" == "Darwin" ]; then
-            # Mac OS X
-            install_adshell_macos
-          else
-            # Other OS
-            install_adshell
-          fi
+          install_nicer_vim_config
           break
           ;;
         [Nn]* )
@@ -870,27 +970,7 @@ verify_adshell_setup() {
           ;;
       esac
     done
+  else
+    printf "${RED} ~~> You need to install Git before you can install {Vim config with nice plugins}${NC}\n"
   fi
-}
-
-improve_vim() {
-  printf "${LIGHT_BLUE}Would you love to bring nice plugins to your Vim?${NC}\n"
-  printf "${YELLOW} ~~> Checkout https://github.com/AdamWhittingham/vim-config before using this Vim configuration${NC}\n"
-  printf "${YELLOW} ~~> Optional: Brings nice plugins to your Vim${NC}\n"
-  while true; do
-    read -p " ~~> Do you wish to improve your {Vim}? [Yes/No] " yn
-    case $yn in
-      [Yy]* )
-        install_nicer_vim_config
-        break
-        ;;
-      [Nn]* )
-        printf "${YELLOW} ~~> Skipping installation${NC}\n"
-        break
-        ;;
-      * )
-        echo "Please answer yes or no\n"
-        ;;
-    esac
-  done
 }

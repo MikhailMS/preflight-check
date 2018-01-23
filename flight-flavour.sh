@@ -9,7 +9,10 @@ macos_flavour() {
   internet_connection
   deduplicate PATH
   verify_bash_files_existence
+
   verify_homebrew_setup
+  verify_git_setup
+  verify_wget_setup
 
   verify_jenv_setup_macos
   verify_java_setup
@@ -22,8 +25,6 @@ macos_flavour() {
   verify_gem_setup
   verify_rails_setup
 
-  verify_git_setup
-  verify_wget_setup
   verify_vim_setup
   improve_vim
   verify_docker_setup
@@ -41,6 +42,9 @@ linux_flavour() {
   deduplicate PATH
   verify_bash_files_existence
 
+  verify_git_setup
+  verify_wget_setup
+
   verify_jenv_setup_linux_redhat
   verify_java_setup
   verify_maven_setup
@@ -52,8 +56,6 @@ linux_flavour() {
   verify_gem_setup
   verify_rails_setup
 
-  verify_git_setup
-  verify_wget_setup
   verify_vim_setup
   improve_vim
   verify_docker_setup
@@ -69,6 +71,9 @@ redhat_flavour() {
   deduplicate PATH
   verify_bash_files_existence
 
+  verify_git_setup
+  verify_wget_setup
+  
   verify_jenv_setup_linux_redhat
   verify_java_setup
   verify_maven_setup
@@ -80,8 +85,6 @@ redhat_flavour() {
   verify_gem_setup
   verify_rails_setup
 
-  verify_git_setup
-  verify_wget_setup
   verify_vim_setup
   improve_vim
   verify_docker_setup

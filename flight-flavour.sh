@@ -62,6 +62,8 @@ linux_flavour() {
   verify_vagrant_setup
   verify_chef_setup
   verify_adshell_setup
+
+  source_bash_file_linux
 }
 
 redhat_flavour() {
@@ -91,4 +93,6 @@ redhat_flavour() {
   verify_vagrant_setup
   verify_chef_setup
   verify_adshell_setup
+
+  source_bash_file_redhat
 }

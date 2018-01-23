@@ -213,6 +213,10 @@ install_vagrant_linux() {
   apt-get install vagrant
 }
 
+source_bash_file_linux() {
+  source ~/.bash_profile
+}
+
 # -------------------- RedHat/Centos ingredients -----------------------
 install_jenv_redhat() {
   printf "${LIGHT_BLUE} --> Installing jenv${NC}\n"
@@ -320,6 +324,10 @@ install_vagrant_redhat() {
   sudo yum install -y VirtualBox-5.1
 
   sudo yum -y install https://releases.hashicorp.com/vagrant/1.9.6/vagrant_1.9.6_i686.rpm
+}
+
+source_bash_file_redhat() {
+  source ~/.bashrc
 }
 
 # -------------------- Shared ingredients -----------------------

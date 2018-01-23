@@ -42,6 +42,8 @@
   If git command is not found, try
 
   1. `curl -LO https://github.com/MikhailMS/preflight-check/archive/master.zip`
+    1. If you are working from behind the proxies, use following command
+    `curl -x http://your_proxy_server:8080 -LO https://github.com/MikhailMS/preflight-check/archive/master.zip`
   2. `unzip master.zip && cd preflight-check-master && . preflight-check.sh`
 
 ## To get an update once downloaded, execute command, when in `preflight-check` folder

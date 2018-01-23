@@ -21,3 +21,4 @@
   -[x] Checks before downloading _Vagrant_
   -[x] Checks before downloading _ChefSDK_
 - [x] Added extra info text for user, so user knows what script does
+- [x] Updated README

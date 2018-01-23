@@ -27,16 +27,16 @@
 - [x] Different checks, depending on OS:
   - [x] Mac OS
   - [x] GNU/Linux/RedHat/Centos
-- [-] Downloads missing components:
+- [x] Downloads missing components:
   - [x] Mac OS
-  - [-] GNU/Linux
-  - [-] Red Hat/Centos
+  - [x] GNU/Linux
+  - [x] Red Hat/Centos
 
 ## Some improvements could be made in the future and extra functionality could be added
 - [ ] Think about project structure, as at the moment it is not well build
 - [ ] Erase duplicated code as much as possible
 
-## To run the script, make sure to run it with sudo prefix, or user is privileged with sudo 
+## To run the script, make sure to run it with sudo prefix, or user is privileged with sudo
   1. `git clone https://github.com/MikhailMS/preflight-check preflight-check && cd preflight-check && . preflight-check.sh`
 
   If git command is not found, try

@@ -344,9 +344,13 @@ install_nicer_vim_config() {
 }
 
 install_miniconda() {
-  printf "${LIGHT_BLUE} --> Installing Miniconda${NC}\n"
-  wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86.sh
-  bash Miniconda3-latest-Linux-x86_64.sh
+  if [ `getconf LONG_BIT` = "64"]; then
+    printf "${LIGHT_BLUE} --> Installing Miniconda 64bit${NC}\n"
+    wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && bash Miniconda2-latest-Linux-x86_64.sh
+  else
+    printf "${LIGHT_BLUE} --> Installing Miniconda 32bit${NC}\n"
+    wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86.sh && bash Miniconda2-latest-Linux-x86.sh
+  fi
 }
 
 install_chef() {

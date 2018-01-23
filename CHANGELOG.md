@@ -28,3 +28,4 @@
 - [x] Fixed Maven installation
 - [x] Fixed jenv installation
 - [x] Fixed rbenv installation
+- [x] Fixed Miniconda installation

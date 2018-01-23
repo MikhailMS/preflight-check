@@ -214,10 +214,11 @@ install_maven_redhat() {
   wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
   tar xvf apache-maven-3.5.2-bin.tar.gz
   sudo mv apache-maven-3.5.2  /usr/local/maven
-  echo "export M2_HOME=/usr/local/apache-maven" >> ~/.bashrc
+  echo "export M2_HOME=/usr/local/maven" >> ~/.bashrc
   echo "export M2=${M2_HOME}/bin" >> ~/.bashrc
   echo "export PATH=${M2}:${PATH}" >> ~/.bashrc
   rm -r apache-maven-3.5.2-bin.tar.gz
+  source ~/.bashrc
 }
 
 install_git_redhat() {

@@ -133,6 +133,7 @@ install_maven_linux() {
   echo "export M2_HOME=/usr/local/apache-maven" >> ~/.bashrc
   echo "export M2=$M2_HOME/bin" >> ~/.bashrc
   echo "export PATH=$M2:$PATH" >> ~/.bashrc
+  source ~/.bashrc
 }
 
 install_git_linux() {

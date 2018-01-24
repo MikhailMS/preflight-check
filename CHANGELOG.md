@@ -31,3 +31,6 @@
 - [x] Fixed Miniconda installation
 - [x] Added source_bash_file method to complete setup after script finishes
 - [x] Increased Ruby version to 2.4.2
+
+## 24 January, 2018:
+- [x] Added `sudo` to all required commands on MacOS/Linux/RedHat

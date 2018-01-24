@@ -35,7 +35,7 @@ install_rbenv_macos() {
   printf "${LIGHT_BLUE} --> Installing rbenv${NC}\n"
   brew update
   brew install rbenv
-  rbenv init
+  sudo rbenv init
   curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 }
 
@@ -119,17 +119,17 @@ install_jenv_linux() {
 
 install_java_linux() {
   printf "${LIGHT_BLUE} --> Installing Java 8${NC}\n"
-  apt-get update
-  apt-get install openjdk-8-jre
-  apt-get install openjdk-8-jdk
+  sudo apt-get update
+  sudo apt-get install openjdk-8-jre
+  sudo apt-get install openjdk-8-jdk
   echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk" >> ~/.bashrc
   echo "export PATH=$PATH:$JAVA_HOME" >> ~/.bashrc
 }
 
 install_maven_linux() {
   printf "${LIGHT_BLUE} --> Installing Maven${NC}\n"
-  apt-get update
-  apt-get install maven
+  sudoapt-get update
+  sudo apt-get install maven
   echo "export M2_HOME=/usr/local/apache-maven" >> ~/.bashrc
   echo "export M2=$M2_HOME/bin" >> ~/.bashrc
   echo "export PATH=$M2:$PATH" >> ~/.bashrc
@@ -137,21 +137,21 @@ install_maven_linux() {
 
 install_git_linux() {
   printf "${LIGHT_BLUE} --> Installing Git${NC}\n"
-  apt-get update
-  apt-get upgrade
-  apt-get install git
+  sudo apt-get update
+  sudo apt-get upgrade
+  sudo apt-get install git
 }
 
 install_wget_linux() {
   printf "${LIGHT_BLUE} --> Installing wget${NC}\n"
-  apt-get install wget
+  sudo apt-get install wget
 }
 
 install_vim_linux() {
   printf "${LIGHT_BLUE} --> Installing Vim${NC}\n"
-  add-apt-repository ppa:jonathonf/vim
-  apt update
-  apt install vim
+  sudo add-apt-repository ppa:jonathonf/vim
+  sudo apt update
+  sudo apt install vim
 }
 
 install_rbenv_linux() {
@@ -193,24 +193,24 @@ install_rbenv_linux() {
 
 install_ruby_linux() {
   printf "${LIGHT_BLUE} --> Installing Ruby${NC}\n"
-  apt-get install ruby-full
+  sudo apt-get install ruby-full
 }
 
 install_docker_linux() {
   printf "${LIGHT_BLUE} --> Installing Docker-CE${NC}\n"
-  apt-get update
-  apt-get install apt-transport-https ca-certificates curl software-properties-common
+  sudo apt-get update
+  sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-  add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-  apt-get update
-  apt-get install docker-ce
+  sudo apt-get update
+  sudo apt-get install docker-ce
 }
 
 install_vagrant_linux() {
   printf "${LIGHT_BLUE} --> Installing Vagrant${NC}\n"
-  apt-get install virtualbox
-  apt-get install vagrant
+  sudo apt-get install virtualbox
+  sudo apt-get install vagrant
 }
 
 source_bash_file_linux() {
@@ -230,8 +230,8 @@ install_jenv_redhat() {
 
 install_java_redhat() {
   printf "${LIGHT_BLUE} --> Installing Java 8${NC}\n"
-  yum update
-  yum install java-1.8.0-openjdk-devel
+  sudo yum update
+  sudo yum install java-1.8.0-openjdk-devel
 }
 
 install_maven_redhat() {
@@ -248,22 +248,22 @@ install_maven_redhat() {
 
 install_git_redhat() {
   printf "${LIGHT_BLUE} --> Installing Git${NC}\n"
-  yum install git
+  sudo yum install git
 }
 
 install_wget_redhat() {
   printf "${LIGHT_BLUE} --> Installing wget${NC}\n"
-  yum install wget
+  sudo yum install wget
 }
 
 install_vim_redhat() {
   printf "${LIGHT_BLUE} --> Installing Vim${NC}\n"
-  yum install gcc git ncurses-devel
+  sudo yum install gcc git ncurses-devel
   git clone https://github.com/vim/vim.git
-  mv vim ~/.vim
+  sudo mv vim ~/.vim
   cd ~/.vim/src
-  make
-  make install
+  sudo make
+  sudo make install
 }
 
 install_rbenv_redhat() {

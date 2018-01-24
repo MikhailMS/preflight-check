@@ -35,3 +35,4 @@
 ## 24 January, 2018:
 - [x] Added `sudo` to all required commands on MacOS/Linux/RedHat
 - [x] Added source for Maven installation
+- [x] Deleting downloaded files after installation completed

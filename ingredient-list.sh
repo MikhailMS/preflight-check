@@ -244,6 +244,8 @@ install_maven_redhat() {
   echo "export M2=${M2_HOME}/bin" >> ~/.bashrc
   echo "export PATH=${M2}:${PATH}" >> ~/.bashrc
   rm -r apache-maven-3.5.2-bin.tar.gz
+  if [[ -d apache-maven-3.5.2 ]]; then
+    rm -r apache-maven-3.5.2
   source ~/.bashrc
 }
 
@@ -356,9 +358,11 @@ install_miniconda() {
   if [ "$(getconf LONG_BIT)" == "64" ]; then
     printf "${LIGHT_BLUE} --> Installing Miniconda 64bit${NC}\n"
     wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && bash Miniconda2-latest-Linux-x86_64.sh
+    sudo rm Miniconda2-latest-Linux-x86_64.sh
   else
     printf "${LIGHT_BLUE} --> Installing Miniconda 32bit${NC}\n"
     wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86.sh && bash Miniconda2-latest-Linux-x86.sh
+    sudo rm Miniconda2-latest-Linux-x86.sh
   fi
 }
 

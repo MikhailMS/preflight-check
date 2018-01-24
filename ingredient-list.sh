@@ -175,8 +175,8 @@ install_rbenv_linux() {
       read -p " ~~> Do you wish to install {Ruby}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          rbenv install -v 2.4.2
-          rbenv global 2.4.2
+          rbenv install -v 2.3.1
+          rbenv global 2.3.1
           break
           ;;
         [Nn]* )
@@ -288,8 +288,8 @@ install_rbenv_redhat() {
       read -p " ~~> Do you wish to install {Ruby}? [Yes/No] " yn
       case $yn in
         [Yy]* )
-          rbenv install -v 2.4.2
-          rbenv global 2.4.2
+          rbenv install -v 2.3.1
+          rbenv global 2.3.1
           break
           ;;
         [Nn]* )

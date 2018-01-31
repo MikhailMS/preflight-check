@@ -247,6 +247,7 @@ install_maven_redhat() {
   rm -r apache-maven-3.5.2-bin.tar.gz
   if [[ -d apache-maven-3.5.2 ]]; then
     rm -r apache-maven-3.5.2
+  fi
   source ~/.bashrc
 }
 

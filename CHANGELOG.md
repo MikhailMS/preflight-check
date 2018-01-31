@@ -36,3 +36,7 @@
 - [x] Added `sudo` to all required commands on MacOS/Linux/RedHat
 - [x] Added source for Maven installation
 - [x] Deleting downloaded files after installation completed
+
+## 31 JANUARY, 2018:
+- [x] Delted redundant functions
+- [x] Jenv installation on MacOS is fixed (it's not added mandatory lines to .bashrc file)

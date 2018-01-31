@@ -4,6 +4,11 @@
 install_jenv_macos() {
   printf "${LIGHT_BLUE} --> Installing jenv${NC}\n"
   brew install jenv
+  echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bashrc
+  echo 'eval "$(jenv init -)"' >> ~/.bashrc
+  printf "${GREEN} :: Configure JVM in jenv      --> 'jenv add /path/to/java/home'${NC}\n"
+  printf "${GREEN} :: Configure which JVM to use --> 'jenv global oracle-1.7.0' or 'jenv local oracle-1.7.0' or 'jenv shell oracle-1.7.0'${NC}\n"
+  source ~/.bashrc
 }
 
 install_java_macos() {
@@ -214,10 +219,6 @@ install_vagrant_linux() {
   sudo apt-get install vagrant
 }
 
-source_bash_file_linux() {
-  source ~/.bash_profile
-}
-
 # -------------------- RedHat/Centos ingredients -----------------------
 install_jenv_redhat() {
   printf "${LIGHT_BLUE} --> Installing jenv${NC}\n"
@@ -327,10 +328,6 @@ install_vagrant_redhat() {
   sudo yum install -y VirtualBox-5.1
 
   sudo yum -y install https://releases.hashicorp.com/vagrant/1.9.6/vagrant_1.9.6_i686.rpm
-}
-
-source_bash_file_redhat() {
-  source ~/.bashrc
 }
 
 # -------------------- Shared ingredients -----------------------

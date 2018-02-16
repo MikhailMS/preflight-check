@@ -3,7 +3,7 @@
 - [x] Discovered, that the order of check for Linux/RedHat/Centos is important -> change it to work as it should
 
 ## 23 January, 2018:
-- [ ] Added checks for installation - if no wget, git or homebrew installed, then user cannot performe installation of missing packages
+- [x] Added checks for installation - if no wget, git or homebrew installed, then user cannot performe installation of missing packages
   - [x] Checks before downloading _Git_
   - [x] Checks before downloading _Miniconda_
   - [x] Checks before downloading _Java_

@@ -9,6 +9,7 @@
   - [x] Ruby presence
   - [x] Vim presence
   - [x] Git presence
+  - [ ] Git Flow presence
   - [x] Docker presence
   - [x] Vagrant presence
   - [x] Homebrew presence
@@ -24,6 +25,9 @@
   - [x] Adshell presence
   - [x] jenv presence
   - [x] bash_profile, bashrc files presence
+  - [x] Chef client presence
+  - [ ] Ansible presence
+  - [ ] ChefDK presence
 - [x] Removes duplicates from PATH variable
 - [x] Different checks, depending on OS:
   - [x] Mac OS
@@ -50,4 +54,4 @@
 ## To get an update once downloaded, execute command, when in `preflight-check` folder
   `git pull`
 
-## Tested on MacOs 10.13.2 High Sierra, Centos 7
+## Tested on MacOs 10.13 High Sierra, Centos 7

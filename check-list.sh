@@ -812,7 +812,7 @@ verify_gradle_setup() {
   printf "${LIGHT_BLUE}Checking Gradle setup${NC}\n"
   if type -p gradle; then
     printf "${GREEN} --> Found Maven executable in PATH${NC}\n"
-    gradle_version=`gradle -v 2>| grep "Gradle" | awk '{print $2}' | tr -d '(WARNING' | tr -d '\n' | sed 's/[[:digit:]]\+\.//g' | cut -d 't' -f1`
+    gradle_version=`gradle -v 2>/dev/null | grep "Gradle" | awk '{print $2}' | tr -d '(WARNING' | tr -d '\n' | sed 's/[[:digit:]]\+\.//g' | cut -d 't' -f1`
     printf "${GREEN} --> Gradle version $gradle_version is installed${NC}\n"
   else
     printf "${RED} --> No Gradle executable is found${NC}\n"

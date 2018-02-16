@@ -40,3 +40,6 @@
 ## 31 JANUARY, 2018:
 - [x] Delted redundant functions
 - [x] Jenv installation on MacOS is fixed (it's not added mandatory lines to .bashrc file)
+
+## 16 FEBRUARY, 2018:
+- [x] Added Gradle check

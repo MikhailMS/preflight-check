@@ -15,6 +15,7 @@
   - [x] rbenv presence
   - [x] wget presence
   - [x] Maven presence
+  - [x] Gradle presence
   - [x] Bundler presence
   - [x] Miniconda presence
   - [x] iTerm2 presence

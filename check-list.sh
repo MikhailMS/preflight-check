@@ -808,6 +808,52 @@ verify_maven_setup() {
   fi
 }
 
+verify_gradle_setup() {
+  printf "${LIGHT_BLUE}Checking Gradle setup${NC}\n"
+  if type -p gradle; then
+    printf "${GREEN} --> Found Maven executable in PATH${NC}\n"
+    gradle_version=`gradle -v 2>| grep "Gradle" | awk '{print $2}' | tr -d '(WARNING' | tr -d '\n' | sed 's/[[:digit:]]\+\.//g' | cut -d 't' -f1`
+    printf "${GREEN} --> Gradle version $gradle_version is installed${NC}\n"
+  else
+    printf "${RED} --> No Gradle executable is found${NC}\n"
+    printf "${YELLOW} ~~> It is optional, but makes building Java projects nicer & easier${NC}\n"
+    while true; do
+      read -p " ~~> Do you wish to install {Gradle}? [Yes/No]" yn
+      case $yn in
+        [Yy]* )
+          if [ "$(uname -s)" == "Darwin" ]; then
+            # Mac OS X
+            if type -p brew; then
+              install_gradle_macos
+            else
+              printf "${RED} ~~> You need to install Homebrew before you can install {Gradle}${NC}\n"
+            fi
+          else    
+            # RedHat/Centos
+            if type -p wget; then
+              if type -p unzip; then
+                install_gradle_linux_redhat
+              else
+                printf "${RED} ~~> You need to install unzip before you can install {Gradle}${NC}\n"
+              fi
+            else
+              printf "${RED} ~~> You need to install wget before you can install {Gradle}${NC}\n"
+            fi
+          fi
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
+  fi
+}
+
 verify_jenv_setup_linux_redhat() {
   printf "${LIGHT_BLUE}Checking jenv setup${NC}\n"
   if [[ -d ~/.jenv ]]; then

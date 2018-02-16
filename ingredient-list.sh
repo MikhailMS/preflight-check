@@ -23,6 +23,12 @@ install_maven_macos() {
   brew install maven
 }
 
+install_gradle_macos() {
+  printf "${LIGHT_BLUE} --> Installing Gradle${NC}\n"
+  brew update
+  brew install gradle
+}
+
 install_miniconda_macos() {
   printf "${LIGHT_BLUE} --> Installing Miniconda${NC}\n"
   wget http://repo.continuum.io/miniconda/Miniconda3-3.7.0-Linux-x86_64.sh -O ~/miniconda.sh
@@ -369,6 +375,13 @@ install_chef() {
   curl -L https://www.opscode.com/chef/install.sh | sudo bash
 }
 
+install_gradle_linux_redhat() {
+ wget https://services.gradle.org/distributions/gradle-4.5.1-bin.zip
+ mkdir -p /opt/gradle
+ unzip -d /opt/gradle gradle-4.5.1-bin.zip
+ rm -f gradle-4.5.1-bin.zip
+ export PATH=$PATH:/opt/gradle/gradle-4.5.1/bin
+}
 # -------------------- Sugar ------------------------------------
 spinnerComplex() {
     local pid=$!

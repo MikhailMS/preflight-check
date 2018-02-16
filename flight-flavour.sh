@@ -17,6 +17,7 @@ macos_flavour() {
   verify_jenv_setup_macos
   verify_java_setup
   verify_maven_setup
+  verify_gradle_setup
   verify_miniconda_setup
   verify_python_setup
   verify_rbenv_setup
@@ -48,6 +49,7 @@ linux_flavour() {
   verify_jenv_setup_linux_redhat
   verify_java_setup
   verify_maven_setup
+  verify_gradle_setup
   verify_miniconda_setup
   verify_python_setup
   verify_rbenv_setup
@@ -79,6 +81,7 @@ redhat_flavour() {
   verify_jenv_setup_linux_redhat
   verify_java_setup
   verify_maven_setup
+  verify_gradle_setup
   verify_miniconda_setup
   verify_python_setup
   verify_rbenv_setup

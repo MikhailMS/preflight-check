@@ -26,6 +26,8 @@ macos_flavour() {
   verify_gem_setup
   verify_rails_setup
 
+  verify_rust_setup
+
   verify_vim_setup
   improve_vim
   verify_docker_setup
@@ -58,6 +60,8 @@ linux_flavour() {
   verify_gem_setup
   verify_rails_setup
 
+  verify_rust_setup
+
   verify_vim_setup
   improve_vim
   verify_docker_setup
@@ -89,6 +93,8 @@ redhat_flavour() {
   verify_bundler_setup
   verify_gem_setup
   verify_rails_setup
+
+  verify_rust_setup
 
   verify_vim_setup
   improve_vim

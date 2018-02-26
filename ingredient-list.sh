@@ -376,11 +376,15 @@ install_chef() {
 }
 
 install_gradle_linux_redhat() {
- wget https://services.gradle.org/distributions/gradle-4.5.1-bin.zip
- mkdir -p /opt/gradle
- unzip -d /opt/gradle gradle-4.5.1-bin.zip
- rm -f gradle-4.5.1-bin.zip
- export PATH=$PATH:/opt/gradle/gradle-4.5.1/bin
+  wget https://services.gradle.org/distributions/gradle-4.5.1-bin.zip
+  mkdir -p /opt/gradle
+  unzip -d /opt/gradle gradle-4.5.1-bin.zip
+  rm -f gradle-4.5.1-bin.zip
+  export PATH=$PATH:/opt/gradle/gradle-4.5.1/bin
+}
+
+install_rust() {
+  curl https://sh.rustup.rs -sSf | sh
 }
 # -------------------- Sugar ------------------------------------
 spinnerComplex() {

@@ -808,6 +808,33 @@ verify_maven_setup() {
   fi
 }
 
+verify_rust_setup() {
+  printf "${LIGHT_BLUE}Checking Rust setup${NC}\n"
+  if type -p rustc; then
+    printf "${GREEN} --> Rust is found on the machine${NC}\n"
+    rust_version=`rustc --version | awk '{print $2}'`
+    printf "${GREEN} --> Rust version $rust_version is installed${NC}\n"
+  else
+    printf "${RED} --> No Rust executable is found${NC}\n"
+    while true; do
+      read -p " ~~> Do you wish to install {Rust}? [Yes/No]" yn
+      case $yn in
+        [Yy]* )
+          install_rust
+          break
+          ;;
+        [Nn]* )
+          printf "${YELLOW} ~~> Skipping installation${NC}\n"
+          break
+          ;;
+        * )
+          echo "Please answer yes or no\n"
+          ;;
+      esac
+    done
+  fi
+}
+
 verify_gradle_setup() {
   printf "${LIGHT_BLUE}Checking Gradle setup${NC}\n"
   if type -p gradle; then
@@ -1042,3 +1069,4 @@ improve_vim() {
     printf "${RED} ~~> You need to have Vim before you can install {Vim config with nice plugins}${NC}\n"
   fi
 }
+

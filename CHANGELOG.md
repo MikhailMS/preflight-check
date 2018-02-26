@@ -43,3 +43,6 @@
 
 ## 16 FEBRUARY, 2018:
 - [x] Added Gradle check
+
+## 26 FEBRUARY, 2018:
+- [x] Added Rust check

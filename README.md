@@ -1,7 +1,7 @@
 # Preflight-check bash script
 
 ## Bash script to check if my workstation has everything I need for development:
-- [x] Currently checks for:
+- [ ] Currently checks for:
   - [x] HTTP and HTTPS proxies presence and whether or not they working
   - [x] Internet connectivity
   - [x] Java presence
@@ -28,6 +28,7 @@
   - [x] Chef client presence
   - [ ] Ansible presence
   - [ ] ChefDK presence
+  - [x] Rust presence
 - [x] Removes duplicates from PATH variable
 - [x] Different checks, depending on OS:
   - [x] Mac OS

@@ -65,7 +65,7 @@ install_git_macos() {
 install_wget_macos() {
   printf "${LIGHT_BLUE} --> Installing wget${NC}\n"
   brew update
-  brew install wget --with-libressl
+  brew install wget
 }
 
 install_vim_macos() {

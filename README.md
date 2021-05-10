@@ -1,7 +1,8 @@
 # Preflight-check bash script
+Bash script to check if my workstation has everything I need for development
 
-## Bash script to check if my workstation has everything I need for development:
-- [ ] Currently checks for:
+## Currently checks for:
+- [ ] Applications / Languages
   - [x] HTTP and HTTPS proxies presence and whether or not they working
   - [x] Internet connectivity
   - [x] Java presence
@@ -38,21 +39,38 @@
   - [x] GNU/Linux
   - [x] Red Hat/Centos
 
+
 ## Some improvements could be made in the future and extra functionality could be added
 - [ ] Think about project structure, as at the moment it is not well build
 - [ ] Erase duplicated code as much as possible
 
-## To run the script, make sure to run it with sudo prefix, or user is privileged with sudo
-  1. `git clone https://github.com/MikhailMS/preflight-check preflight-check && cd preflight-check && . preflight-check.sh`
 
-  If git command is not found, try
+## Installation
+  1. Download the code
+  ```bash
+  # If git command installed
+  git clone https://github.com/MikhailMS/preflight-check preflight-check
 
-  1. `curl -LO https://github.com/MikhailMS/preflight-check/archive/master.zip`
-    1. If you are working from behind the proxies, use following command
-    `curl -x http://your_proxy_server:8080 -LO https://github.com/MikhailMS/preflight-check/archive/master.zip`
-  2. `unzip master.zip && cd preflight-check-master && . preflight-check.sh`
+  # If git command is not found
+  curl -LO https://github.com/MikhailMS/preflight-check/archive/master.zip
+  unzip master.zip
 
-## To get an update once downloaded, execute command, when in `preflight-check` folder
-  `git pull`
+  # If you are working from behind the proxies, use following command
+  curl -x http://your_proxy_server:8080 -LO https://github.com/MikhailMS/preflight-check/archive/master.zip
+  unzip master.zip
+  ```
+  2. Run scripts
+  ``` bash
+  cd preflight-check-master
 
-## Tested on MacOs 10.13 High Sierra, Centos 7
+  # Execute with sudo
+  sudo bash preflight-check.sh
+
+  # Or as sudo enabled user
+  . preflight-check.sh
+  ```
+  4. To update, execute `git pull`, when in `preflight-check` folder
+
+
+## Notes:
+  1. Tested on MacOs 10.13 High Sierra, Centos 7

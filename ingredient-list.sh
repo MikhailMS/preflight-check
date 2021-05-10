@@ -14,7 +14,7 @@ install_jenv_macos() {
 install_java_macos() {
   printf "${LIGHT_BLUE} --> Installing Java 8${NC}\n"
   brew tap caskroom/versions 2>/dev/null
-  brew cask install java8
+  brew install --cask java8
 }
 
 install_maven_macos() {
@@ -83,8 +83,8 @@ install_docker_macos() {
 
 install_vagrant_macos() {
   printf "${LIGHT_BLUE} --> Installing Vagrant${NC}\n"
-  brew cask install virtualbox
-  brew cask install vagrant
+  brew install --cask virtualbox
+  brew install --cask vagrant
 }
 
 install_chef_macos() {
@@ -96,7 +96,7 @@ install_chef_macos() {
 
 install_smcfancontrol_macos() {
   printf "${LIGHT_BLUE} --> Installing smcfancontrol${NC}\n"
-  brew cask install smcfancontrol
+  brew install --cask smcfancontrol
 }
 
 install_iterm_macos() {

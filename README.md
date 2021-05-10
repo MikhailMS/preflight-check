@@ -49,19 +49,19 @@ Bash script to check if my workstation has everything I need for development
   1. Download the code
   ```bash
   # If git command installed
-  git clone https://github.com/MikhailMS/preflight-check preflight-check
+  git clone https://github.com/MikhailMS/preflight-check
 
   # If git command is not found
   curl -LO https://github.com/MikhailMS/preflight-check/archive/master.zip
-  unzip master.zip
+  unzip master.zip -d preflight-checkp
 
   # If you are working from behind the proxies, use following command
   curl -x http://your_proxy_server:8080 -LO https://github.com/MikhailMS/preflight-check/archive/master.zip
-  unzip master.zip
+  unzip master.zip -d preflight-check
   ```
   2. Run scripts
   ``` bash
-  cd preflight-check-master
+  cd preflight-check
 
   # Execute with sudo
   sudo bash preflight-check.sh

@@ -30,10 +30,14 @@ install_gradle_macos() {
 }
 
 install_miniconda_macos() {
-  printf "${LIGHT_BLUE} --> Installing Miniconda${NC}\n"
-  wget http://repo.continuum.io/miniconda/Miniconda3-3.7.0-Linux-x86_64.sh -O ~/miniconda.sh
-  bash ~/miniconda.sh -b -p $HOME/miniconda
-  echo "export PATH=$HOME/miniconda/bin:$PATH" >> ~/.bash_profile
+  if [ -d "$HOME/miniconda" ] || [ -d "$HOME/miniconda3" ] || [ -d "$HOME/.miniconda" ] || [ -d "$HOME/.miniconda3" ]; then
+    printf "${YELLOW} ~~> Miniconda folder discovered! Try restarting terminal session${NC}\n"
+  else
+    printf "${LIGHT_BLUE} --> Installing Miniconda${NC}\n"
+    wget http://repo.continuum.io/miniconda/Miniconda3-3.7.0-Linux-x86_64.sh -O ~/miniconda.sh
+    bash ~/miniconda.sh -b -p $HOME/miniconda
+    echo "export PATH=$HOME/miniconda/bin:$PATH" >> ~/.bash_profile
+  fi
 }
 
 install_python_macos() {
@@ -360,13 +364,21 @@ install_nicer_vim_config() {
 
 install_miniconda() {
   if [ "$(getconf LONG_BIT)" == "64" ]; then
-    printf "${LIGHT_BLUE} --> Installing Miniconda 64bit${NC}\n"
-    wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && bash Miniconda2-latest-Linux-x86_64.sh
-    sudo rm Miniconda2-latest-Linux-x86_64.sh
+    if [ -d "$HOME/miniconda" ] || [ -d "$HOME/miniconda3" ] || [ -d "$HOME/.miniconda" ] || [ -d "$HOME/.miniconda3" ]; then
+      printf "${YELLOW} ~~> Miniconda folder discovered! Try restarting terminal session${NC}\n"
+    else
+      printf "${LIGHT_BLUE} --> Installing Miniconda 64bit${NC}\n"
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && bash Miniconda2-latest-Linux-x86_64.sh
+      sudo rm Miniconda2-latest-Linux-x86_64.sh
+    fi
   else
-    printf "${LIGHT_BLUE} --> Installing Miniconda 32bit${NC}\n"
-    wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86.sh && bash Miniconda2-latest-Linux-x86.sh
-    sudo rm Miniconda2-latest-Linux-x86.sh
+    if [ -d "$HOME/miniconda" ] || [ -d "$HOME/miniconda3" ] || [ -d "$HOME/.miniconda" ] || [ -d "$HOME/.miniconda3" ]; then
+      printf "${YELLOW} ~~> Miniconda folder discovered! Try restarting terminal session${NC}\n"
+    else
+      printf "${LIGHT_BLUE} --> Installing Miniconda 32bit${NC}\n"
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86.sh && bash Miniconda2-latest-Linux-x86.sh
+      sudo rm Miniconda2-latest-Linux-x86.sh
+    fi
   fi
 }
 
@@ -386,6 +398,7 @@ install_gradle_linux_redhat() {
 install_rust() {
   curl https://sh.rustup.rs -sSf | sh
 }
+
 # -------------------- Sugar ------------------------------------
 spinnerComplex() {
     local pid=$!
